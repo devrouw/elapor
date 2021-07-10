@@ -30,8 +30,8 @@ case "daftar":
     $kecamatan = $_POST['kecamatan'];
     $kelurahan = $_POST['kelurahan'];
     $foto_profil = $_POST['foto_profil'];
-    $password = $_POST['password'];
-    // $s = substr(str_shuffle(str_repeat("!@#$%^&*()0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 6)), 0, 6);
+    // $password = $_POST['password'];
+    $s = substr(str_shuffle(str_repeat("!@#$%^&*()0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 6)), 0, 6);
 
     $query = "BEGIN; 
     INSERT INTO tb_masyarakat(
@@ -46,36 +46,36 @@ case "daftar":
     );
     COMMIT;";
 
-    // $hasil = mysqli_multi_query($con,$query);
-    // if($hasil){
-    //     $response["code"] = 200;
-    //     $response["status"] = "OK";
-    //     $response["data"] = "data berhasil diinput.";
-    //     $response["message"] = $message;
-    //     $subject = 'Akun Anda Berhasil dibuat';
-    //     echo json_encode($response);
+    $hasil = mysqli_multi_query($con,$query);
+    if($hasil){
+        $response["code"] = 200;
+        $response["status"] = "OK";
+        $response["data"] = "data berhasil diinput.";
+        $response["message"] = $message;
+        $subject = 'Akun Anda Berhasil dibuat';
+        echo json_encode($response);
 
-    //     $message = 'Selamat akun anda telah berhasil dibuat! <br>Sekarang anda bisa mengakses akun anda dengan informasi sbb:<br>
-    //         Email: '.$email. ' <br>Password: '.$s.'';
-    //     $headers = 'From: info@sha-dev.com'       . "\r\n" .
-    //                 'Reply-To: info@sha-dev.com' . "\r\n" .
-    //                 'X-Mailer: PHP/' . phpversion();
+        $message = 'Selamat akun anda telah berhasil dibuat! <br>Sekarang anda bisa mengakses akun anda dengan informasi sbb:<br>
+            <b>Email:</b> '.$email. ' <br><b>Password:</b> '.$s.'';
+        $headers = 'From: info@sha-dev.com'       . "\r\n" .
+                    'Reply-To: info@sha-dev.com' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
 
-    //     mail($email, $subject, $message, $headers);
-    // }else
-    // {
-    //     $response["code"] = 404;
-    //     $response["status"] = "error";
-    //     $response["data"] = null;
-    //     $response["message"] = "input error $message";
+        mail($email, $subject, $message, $headers);
+    }else
+    {
+        $response["code"] = 404;
+        $response["status"] = "error";
+        $response["data"] = null;
+        $response["message"] = "input error $message";
         
-    //     echo json_encode($response);
+        echo json_encode($response);
 
-    // }
+    }
 
     $message = 'Data Berhasil Diinput!';
     
-    include './res.php';
+    // include './res.php';
 die();
 break;
 
