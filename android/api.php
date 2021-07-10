@@ -30,7 +30,7 @@ case "daftar":
     $kecamatan = $_POST['kecamatan'];
     $kelurahan = $_POST['kelurahan'];
     $foto_profil = $_POST['foto_profil'];
-    $s = substr(str_shuffle(str_repeat("!@#$%^&*()0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 5)), 0, 5);
+    $s = substr(str_shuffle(str_repeat("!@#$%^&*()0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 6)), 0, 6);
 
     $query = "INSERT INTO tb_user(
         nik,nama_lengkap,tempat_lahir,tgl_lahir,jenis_kelamin,alamat,email,password,no_telpon,kode_pos,kabupaten,kecamatan,kelurahan,foto_profil
