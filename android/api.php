@@ -102,7 +102,7 @@ case "login":
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM tb_user WHERE email='$email' AND password";
+    $query = "SELECT * FROM tb_akun WHERE email='$email' AND password='$password'";
     $message = 'Data Ada!';
     
     include './res.php';
