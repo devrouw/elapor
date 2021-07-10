@@ -110,12 +110,23 @@ die();
 break;
 
 #----------------------------------------------------------------------------------------------------------------------------------------
-case "show_detail":
-    $type_query = "show";
-    $id = $_POST['id'];
+case "input_aduan":
+    $type_query = "input";
+    $foto_aduan = $_POST['foto_aduan'];
+    $pesan = $_POST['pesan'];
+    $no_telpon = $_POST['no_telpon'];
+    $lng = $_POST['lng'];
+    $lat = $_POST['lat'];
+    $kategori = $_POST['kategori'];
+    $nik = $_POST['nik'];
+    $id_dinas = $_POST['id_dinas'];
 
-    $query = "SELECT konten.id, konten.judul, konten.deskripsi, konten.gambar, konten.sumber, konten.id_category, category.category FROM konten inner join category ON konten.id_category=category.id WHERE konten.id='$id'";
-    $message = 'Data Ada!';
+    $query = "INSERT INTO tb_pengaduan(
+        foto_aduan,pesan,no_telpon,lng,lat,kategori,id_dinas,nik
+    ) VALUES(
+        '$foto_aduan','$pesan','$no_telpon','$lng','$lat','$kategori','$id_dinas','$nik'
+    )";
+    $message = 'Data Berhasil diinput!';
     
     include './res.php';
 die();
