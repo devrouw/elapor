@@ -42,7 +42,7 @@ case "daftar":
     INSERT INTO tb_akun(
         email,password,nik
     ) VALUES (
-        '$email','$password','$nik'
+        '$email','$s','$nik'
     );
     COMMIT;";
 
