@@ -36,8 +36,8 @@ case "daftar":
     ) VALUES(
         '$nik','$nama_lengkap','$tempat_lahir','$tanggal_lahir','$jenis_kelamin','$alamat','$email','$no_telepon','$kode_pos','$kabupaten','$kecamatan','$kelurahan','$foto_profil'
     )";
-    
-    $message = 'Data Ada!';
+
+    $message = 'Data Berhasil Diinput!';
     
     include './res.php';
 die();
