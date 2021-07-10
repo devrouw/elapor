@@ -47,8 +47,8 @@ case "daftar":
         $subject = 'Akun Anda Berhasil dibuat';
         echo json_encode($response);
 
-        $message = 'Selamat akun anda telah berhasil dibuat! Sekarang anda bisa mengakses akun anda dengan informasi sbb:
-            email: '.$email. 'password: '.$s.'';
+        $message = 'Selamat akun anda telah berhasil dibuat! <br>Sekarang anda bisa mengakses akun anda dengan informasi sbb:<br>
+            email: '.$email. ' <br>password: '.$s.'';
         $headers = 'From: info@sha-dev.com'       . "\r\n" .
                     'Reply-To: info@sha-dev.com' . "\r\n" .
                     'X-Mailer: PHP/' . phpversion();
