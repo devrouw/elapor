@@ -30,30 +30,54 @@ case "daftar":
     $kecamatan = $_POST['kecamatan'];
     $kelurahan = $_POST['kelurahan'];
     $foto_profil = $_POST['foto_profil'];
+    $s = substr(str_shuffle(str_repeat("!@#$%^&*()0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 5)), 0, 5);
 
     $query = "INSERT INTO tb_user(
-        nik,nama_lengkap,tempat_lahir,tgl_lahir,jenis_kelamin,alamat,email,no_telpon,kode_pos,kabupaten,kecamatan,kelurahan,foto_profil
+        nik,nama_lengkap,tempat_lahir,tgl_lahir,jenis_kelamin,alamat,email,password,no_telpon,kode_pos,kabupaten,kecamatan,kelurahan,foto_profil
     ) VALUES(
-        '$nik','$nama_lengkap','$tempat_lahir','$tanggal_lahir','$jenis_kelamin','$alamat','$email','$no_telepon','$kode_pos','$kabupaten','$kecamatan','$kelurahan','$foto_profil'
+        '$nik','$nama_lengkap','$tempat_lahir','$tanggal_lahir','$jenis_kelamin','$alamat','$email','$s','$no_telepon','$kode_pos','$kabupaten','$kecamatan','$kelurahan','$foto_profil'
     )";
+
+    $hasil = mysqli_multi_query($con,$query);
+    if($hasil){
+        $response["code"] = 200;
+        $response["status"] = "OK";
+        $response["data"] = "data berhasil diinput.";
+        $response["message"] = $message;
+        $subject = 'Akun Anda Berhasil dibuat';
+        echo json_encode($response);
+
+        $message = 'Selamat akun anda telah berhasil dibuat! Sekarang anda bisa mengakses akun anda dengan informasi sbb:
+            email: '.$email. 'password: '.$s.'';
+        $headers = 'From: info@sha-dev.com'       . "\r\n" .
+                    'Reply-To: info@sha-dev.com' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
+
+        mail($email, $subject, $message, $headers);
+    }else
+    {
+        $response["code"] = 404;
+        $response["status"] = "error";
+        $response["data"] = null;
+        $response["message"] = "input error $message";
+        
+        echo json_encode($response);
+
+    }
 
     $message = 'Data Berhasil Diinput!';
     
-    include './res.php';
+    // include './res.php';
 die();
 break;
 
 #----------------------------------------------------------------------------------------------------------------------------------------
-case "show_sub_category":
+case "login":
     $type_query = "show";
-    $id = $_POST['id'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-    if($id == "all"){
-        $query = "SELECT konten.id, konten.judul, konten.deskripsi, konten.gambar, konten.sumber, konten.id_category, category.category, category.subtitle FROM konten inner join category ON konten.id_category=category.id";
-    }else{
-        $query = "SELECT konten.id, konten.judul, konten.deskripsi, konten.gambar, konten.sumber, konten.id_category, category.category, category.subtitle FROM konten inner join category ON konten.id_category=category.id WHERE konten.id_category='$id'";
-    }
-    
+    $query = "SELECT * FROM tb_user WHERE email='$email' AND password";
     $message = 'Data Ada!';
     
     include './res.php';
