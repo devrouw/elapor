@@ -69,8 +69,8 @@ case "daftar":
         </body>
         </html>
         ";
-        $message = 'Selamat akun anda telah berhasil dibuat! <br>Sekarang anda bisa mengakses akun anda dengan informasi sbb:<br>
-            Email:'.$email. ' Password: '.$s.'';
+        // $message = 'Selamat akun anda telah berhasil dibuat! <br>Sekarang anda bisa mengakses akun anda dengan informasi sbb:<br>
+        //     Email: '.$email. ' Password: '.$s.'';
             // Always set content-type when sending HTML email
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
