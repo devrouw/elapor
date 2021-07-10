@@ -55,9 +55,26 @@ case "daftar":
         $subject = 'Akun Anda Berhasil dibuat';
         echo json_encode($response);
 
+        $message = "
+        <html>
+        <head>
+        <title>Akun Berhasil Dibuat</title>
+        </head>
+        <body>
+        <h5>Selamat! Akun Anda berhasil dibuat! Silakan login menggunakan informasi berikut:</h5>
+        <br>
+        <b>Email: <b> ".$email."
+        <br>
+        <b>Password: ".$s."</b>
+        </body>
+        </html>
+        ";
         $message = 'Selamat akun anda telah berhasil dibuat! <br>Sekarang anda bisa mengakses akun anda dengan informasi sbb:<br>
-            <b>Email:</b> '.$email. ' <br><b>Password:</b> '.$s.'';
-        $headers = 'From: info@sha-dev.com'       . "\r\n" .
+            Email:'.$email. ' Password: '.$s.'';
+            // Always set content-type when sending HTML email
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= 'From: info@sha-dev.com'       . "\r\n" .
                     'Reply-To: info@sha-dev.com' . "\r\n" .
                     'X-Mailer: PHP/' . phpversion();
 
