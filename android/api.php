@@ -61,7 +61,7 @@ case "daftar":
         <title>Akun Berhasil Dibuat</title>
         </head>
         <body>
-        <h5>Selamat! Akun Anda berhasil dibuat! Silakan login menggunakan informasi berikut:</h5>
+        <h3>Selamat! Akun Anda berhasil dibuat! Silakan login menggunakan informasi berikut:</h3>
         <br>
         <b>Email: <b> ".$email."
         <br>
