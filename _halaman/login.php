@@ -5,11 +5,11 @@ if (isset($_POST['login'])) {
     $password = $_POST['password'];
     $db->where("username",$username);
     $db->where("password",$password);
-    $data = $db->ObjectBuilder()->getOne("tb_akun");
+    $data = $db->ObjectBuilder()->getOne("tb_dinas");
     if($db->count>0){
         $session->set("logged", true);
         $session->set("username", $data->username);
-        $session->set("id_akun", $data->id_akun);
+        $session->set("id", $data->id);
         $session->set("info", '<div class="alert alert-success alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <h5><i class="icon fas fa-ban"></i> Success!</h5>
@@ -41,11 +41,11 @@ if (isset($_POST['login'])) {
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="#"><b>Login</b>SIP</a>
+            <a href="#"><b>Login</b>E-Lapor</a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">Login untuk memulai Sesi</p>
             <?=$session->pull("info")?>
             <form method="post">
                 <label>Nama Pengguna</label>
