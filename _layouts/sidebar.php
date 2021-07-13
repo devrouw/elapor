@@ -32,17 +32,17 @@
           </a>
         </li>
         <li>
-        <a href="<?=url('kelurahan')?>">
+        <a href="<?=url('data_masyarakat')?>">
         <i class="fa fa-circle-o"></i> <span>Data Masyarakat</span>
         </a>
         </li>
         <li>
-        <a href="<?=url('kelurahan')?>">
+        <a href="<?=url('data_pengaduan')?>">
         <i class="fa fa-circle-o"></i> <span>Data Pengaduan</span>
         </a>
         </li>
         <li>
-        <a href="<?=url('kelurahan')?>">
+        <a href="<?=url('data_perbaikan')?>">
         <i class="fa fa-circle-o"></i> <span>Data Perkembangan Perbaikan</span>
         </a>
         </li>

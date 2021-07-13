@@ -8,7 +8,7 @@ if (isset($_POST['login'])) {
     $data = $db->ObjectBuilder()->getOne("tb_dinas");
     if($db->count>0){
         $session->set("logged", true);
-        $session->set("username", $data->username);
+        $session->set("dinas", $data->dinas);
         $session->set("id", $data->id);
         $session->set("info", '<div class="alert alert-success alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
