@@ -31,32 +31,20 @@
             <i class="fa fa-dashboard"></i> <span>Beranda</span>
           </a>
         </li>
-        <li><a href="<?=url('kelurahan')?>"><i class="fa fa-circle-o"></i> Kelurahan</a></li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-map-marker"></i>
-            <span>One Map</span>
-            <span class="pull-right-container">
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?=url('map-standar')?>"><i class="fa fa-circle-o"></i> Standar</a></li>
-          </ul>
+        <li>
+        <a href="<?=url('kelurahan')?>">
+        <i class="fa fa-circle-o"></i> <span>Data Masyarakat</span>
+        </a>
         </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-map"></i>
-            <span>Manajemen Data</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?=url('bangunan')?>"><i class="fa fa-circle-o"></i> Data Bangunan</a></li>
-            <li><a href="<?=url('warga')?>"><i class="fa fa-circle-o"></i> Data Warga</a></li>
-          </ul>
+        <li>
+        <a href="<?=url('kelurahan')?>">
+        <i class="fa fa-circle-o"></i> <span>Data Pengaduan</span>
+        </a>
+        </li>
+        <li>
+        <a href="<?=url('kelurahan')?>">
+        <i class="fa fa-circle-o"></i> <span>Data Perkembangan Perbaikan</span>
+        </a>
         </li>
         <li>
           <a href="<?=url('logout')?>">
