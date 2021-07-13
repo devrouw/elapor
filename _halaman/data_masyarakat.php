@@ -1,7 +1,7 @@
 <?php
-$title = 'Kelurahan';
+$title = 'Data Masyarakat';
 $judul = $title;
-$url = 'kelurahan';
+$url = 'data_masyarakat';
 $setTemplate = true;
 
 if (isset($_POST['simpan'])) {
@@ -59,7 +59,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     }
 ?>
 
-    <?= content_open('Form Kelurahan') ?>
+    <?= content_open('Form Data Masyarakat') ?>
     <form method="post" enctype="multipart/form-data">
         <?= input_hidden('id_kelurahan', $id_kelurahan) ?>
         <div class="form-group">
@@ -82,29 +82,45 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     <?= content_close() ?>
 <?php } else { ?>
 
-    <?= content_open('Data Kelurahan') ?>
+    <?= content_open('Data Masyarakat') ?>
     <a href="<?= url($url . '&tambah') ?>" class="btn btn-success"><i class="fa fa-plus"></i>Tambah</a>
     <hr>
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>No</th>
-                <th>Kode Kelurahan</th>
-                <th>Nama Kelurahan</th>
-                <th>GeoJSON</th>
+                <th>NIK</th>
+                <th>Nama Lengkap</th>
+                <th>Tempat Lahir</th>
+                <th>Tanggal Lahir</th>
+                <th>Jenis Kelamin</th>
+                <th>Alamat</th>
+                <th>No Telp</th>
+                <th>Kode Pos</th>
+                <th>Kabupaten</th>
+                <th>Kecamatan</th>
+                <th>Kelurahan</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
             <?php
             $no = 1;
-            $get = $db->ObjectBuilder()->get('tb_kelurahan');
+            $get = $db->ObjectBuilder()->get('tb_masyarakat');
             foreach ($get as $row) { ?>
                 <tr>
                     <td><?= $no ?></td>
-                    <td><?= $row->kd_kelurahan ?></td>
-                    <td><?= $row->nm_kelurahan ?></td>
-                    <td><a href="<?=assets('unggah/geojson/'.$row->geojson_kelurahan)?>" target="_BLANK"><?=$row->geojson_kelurahan?></a></td>
+                    <td><?= $row->nik ?></td>
+                    <td><?= $row->nama_lengkap ?></td>
+                    <td><?= $row->tempat_lahir ?></td>
+                    <td><?= $row->tgl_lahir ?></td>
+                    <td><?= $row->jenis_kelamin ?></td>
+                    <td><?= $row->alamat ?></td>
+                    <td><?= $row->no_telpon ?></td>
+                    <td><?= $row->kode_pos ?></td>
+                    <td><?= $row->kabupaten ?></td>
+                    <td><?= $row->kecamatan ?></td>
+                    <td><?= $row->kelurahan ?></td>
                     <td>
                         <a href="<?= url($url . '&ubah&id=' . $row->id_kelurahan) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Ubah</a>
                         <a href="<?= url($url . '&hapus&id=' . $row->id_kelurahan) ?>" class="btn btn-danger" onclick="return confirm('Hapus Data?')"> <i class="fa fa-trash"></i>Hapus</a>

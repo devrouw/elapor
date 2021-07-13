@@ -23,4 +23,5 @@ Selamat Datang <?= $session->get("dinas") ?> di Beranda
             </a>
         </div>
     </div>
+</div>
     <?= content_close() ?>
