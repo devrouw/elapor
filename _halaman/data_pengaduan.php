@@ -1,9 +1,8 @@
 <?php
-$title = 'Data Bangunan';
+$title = 'Data Pengaduan';
 $judul = $title;
-$url = 'bangunan';
+$url = 'data_pengaduan';
 $setTemplate = true;
-$fileJs = 'leaflet-bangunanJs';
 
 if (isset($_POST['simpan'])) {
     $file=upload('foto_bangunan','bangunan');
@@ -84,7 +83,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     }
 ?>
 
-    <?= content_open('Form Data Bangunan') ?>
+    <?= content_open('Form Data Pengaduan') ?>
     <form method="post" enctype="multipart/form-data">
         <?= input_hidden('id_bangunan', $id_bangunan) ?>
         <div class="row">
@@ -181,42 +180,38 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     <?= content_close() ?>
 <?php } else { ?>
 
-    <?= content_open('Data Bangunan') ?>
+    <?= content_open('Data Pengaduan') ?>
     <a href="<?= url($url . '&tambah') ?>" class="btn btn-success"><i class="fa fa-plus"></i>Tambah</a>
     <hr>
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>No</th>
-                <th>Foto Bangunan</th>
-                <th>Jenis Bangunan</th>
-                <th>Alamat</th>
-                <th>Lng</th>
-                <th>Lat</th>
-                <th>No.Rumah</th>
-                <th>Luas Tanah</th>
-                <th>Luas Bangunan</th>
-                <th>Warga</th>
+                <th>Nama Pelapor</th>
+                <th>Kategori</th>
+                <th>Foto Aduan</th>
+                <th>Keterangan</th>
+                <th>No Telp</th>
+                <th>Lokasi GPS</th>
+                <th>Status</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
             <?php
             $no = 1;
-            $db->join('tb_warga b','a.id_warga=b.id_warga','LEFT');
-            $get = $db->ObjectBuilder()->get('tb_bangunan a');
+            $db->join('tb_masyarakat b','a.nik=b.nik','LEFT');
+            $get = $db->ObjectBuilder()->get('tb_pengaduan a');
             foreach ($get as $row) { ?>
                 <tr>
                     <td><?= $no ?></td>
-                    <td><img src="<?=assets('unggah/bangunan/'.$row->foto_bangunan)?>" style="width:50px;height:50px;"></td>
-                    <td><?= $row->jenis_bangunan ?></td>
-                    <td><?= $row->alamat ?></td>
-                    <td><?= $row->lng ?></td>
-                    <td><?= $row->lat ?></td>
-                    <td><?= $row->nomor_rumah ?></td>
-                    <td><?= $row->luas_tanah ?></td>
-                    <td><?= $row->luas_bangunan ?></td>
-                    <td><?= $row->username ?></td>
+                    <td><?= $row->nama_lengkap ?></td>
+                    <td><?= $row->kategori ?></td>
+                    <td><img src="<?=assets('unggah/bangunan/'.$row->foto_aduan)?>" style="width:50px;height:50px;"></td>
+                    <td><?= $row->pesan ?></td>
+                    <td><?= $row->no_telpon ?></td>
+                    <td><?= $row->lat ?>,<?= $row->lng ?></td>
+                    <td>Belum ditangani</td>
                     <td>
                         <a href="<?= url($url . '&ubah&id=' . $row->id_bangunan) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Ubah</a>
                         <a href="<?= url($url . '&hapus&id=' . $row->id_bangunan) ?>" class="btn btn-danger" onclick="return confirm('Hapus Data?')"> <i class="fa fa-trash"></i>Hapus</a>

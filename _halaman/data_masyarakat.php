@@ -61,7 +61,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
 
     <?= content_open('Form Data Masyarakat') ?>
     <form method="post" enctype="multipart/form-data">
-        <?= input_hidden('id_kelurahan', $id_kelurahan) ?>
+        <?= input_hidden('nik', $nik) ?>
         <div class="form-group">
             <label>Kode Kelurahan</label>
             <?= input_text('kd_kelurahan', $kd_kelurahan) ?>
