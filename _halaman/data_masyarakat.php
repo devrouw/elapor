@@ -5,10 +5,6 @@ $url = 'data_masyarakat';
 $setTemplate = true;
 
 if (isset($_POST['simpan'])) {
-    $file=upload('geojson_kelurahan','geojson');
-    if($file!=false){
-        $data['geojson_kelurahan']=$file;
-    }
     if ($_POST['id_kelurahan'] == "") {
         $data['kd_kelurahan'] = $_POST['kd_kelurahan'];
         $data['nm_kelurahan'] = $_POST['nm_kelurahan'];
@@ -47,14 +43,13 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     $nm_kelurahan = "";
     $geojson_kelurahan = "";
 
-    if (isset($_GET['ubah']) and isset($_GET['id'])) {
-        $db->where('id_kelurahan', $_GET['id']);
-        $row = $db->ObjectBuilder()->getOne('tb_kelurahan');
+    if (isset($_GET['ubah']) and isset($_GET['nik'])) {
+        $db->where('nik', $_GET['nik']);
+        $row = $db->ObjectBuilder()->getOne('tb_masyarakat');
         if ($db->count > 0) {
-            $id_kelurahan = $row->id_kelurahan;
-            $kd_kelurahan = $row->kd_kelurahan;
-            $nm_kelurahan = $row->nm_kelurahan;
-            $geojson_kelurahan = $row->geojson_kelurahan;
+            $id_kelurahan = $row->nama_lengkap;
+            $kd_kelurahan = $row->tempat_lahir;
+            $nm_kelurahan = $row->tgl_lahir;
         }
     }
 ?>
@@ -216,8 +211,8 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
                     <td><?= $row->kecamatan ?></td>
                     <td><?= $row->kelurahan ?></td>
                     <td>
-                        <a href="<?= url($url . '&ubah&id=' . $row->nik) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Ubah</a>
-                        <a href="<?= url($url . '&hapus&id=' . $row->nik) ?>" class="btn btn-danger" onclick="return confirm('Hapus Data?')"> <i class="fa fa-trash"></i>Hapus</a>
+                        <a href="<?= url($url . '&ubah&nik=' . $row->nik) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Ubah</a>
+                        <a href="<?= url($url . '&hapus&nik=' . $row->nik) ?>" class="btn btn-danger" onclick="return confirm('Hapus Data?')"> <i class="fa fa-trash"></i>Hapus</a>
                     </td>
                 </tr>
             <?php
