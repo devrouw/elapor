@@ -162,7 +162,6 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
                     <td><?= $row->status_perbaikan ?></td>
                     <td>
                         <a href="<?= url($url . '&ubah&id=' . $row->id_warga) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Ubah</a>
-                        <a href="<?= url($url . '&hapus&id=' . $row->id_warga) ?>" class="btn btn-danger" onclick="return confirm('Hapus Data?')"> <i class="fa fa-trash"></i>Hapus</a>
                     </td>
                 </tr>
             <?php

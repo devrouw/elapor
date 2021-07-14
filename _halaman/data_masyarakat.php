@@ -62,6 +62,100 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     <?= content_open('Form Data Masyarakat') ?>
     <form method="post" enctype="multipart/form-data">
         <?= input_hidden('nik', $nik) ?>
+        <div class="row">
+        <div class="col-md-6">
+        
+        <div class="form-group" class="">
+            <label>Nama Lengkap</label>
+            <div class="row">
+            <div class="col-md-10">
+            <?= input_file('foto_bangunan', $foto_bangunan) ?>
+            </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+            <div class="col-md-5">
+            <label>Tempat Lahir</label>
+            <?= input_text('lng', $lng) ?>
+            </div>
+            <div class="col-md-5">
+            <label>Tanggal Lahir</label>
+            <?= input_text('lat', $lat) ?>
+            </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Jenis Kelamin</label>
+            <div class="row">
+            <div class="col-md-10">
+            <?= input_text('jenis_bangunan', $jenis_bangunan) ?>
+            </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Alamat</label>
+            <div class="row">
+            <div class="col-md-10">
+            <?= input_text('alamat', $alamat) ?>
+            </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Nomor Telpon</label>
+            <div class="row">
+            <div class="col-md-10">
+            <?= input_text('nomor_rumah', $nomor_rumah) ?>
+            </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Kode Pos</label>
+            <div class="row">
+            <div class="col-md-10">
+            <?= input_text('luas_tanah', $luas_tanah) ?>
+            </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Kabupaten</label>
+            <div class="row">
+            <div class="col-md-10">
+            <?= input_text('luas_bangunan', $luas_bangunan) ?>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-6">
+        <h3>Data Akun</h3>
+        <div class="form-group" class="">
+            <label>Email</label>
+            <div class="row">
+            <div class="col-md-10">
+            <?= input_file('foto_bangunan', $foto_bangunan) ?>
+            </div>
+            </div>
+        </div>
+        <div class="form-group" class="">
+            <label>Password</label>
+            <div class="row">
+            <div class="col-md-10">
+            <?= input_file('foto_bangunan', $foto_bangunan) ?>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-12">
+        <hr>
+        <div class="form-group">
+            <button type="submit" name="simpan" class="btn btn-info"> <i class="fa fa-save"></i>Simpan</button>
+            <a href="<?= url($url) ?>" class="btn btn-danger"> <i class="fa fa-reply"></i>Kembali</a>
+        </div>
+        </div>
+        </div>
+    </form>
+    <form method="post" enctype="multipart/form-data">
+        <?= input_hidden('nik', $nik) ?>
         <div class="form-group">
             <label>Kode Kelurahan</label>
             <?= input_text('kd_kelurahan', $kd_kelurahan) ?>
@@ -122,8 +216,8 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
                     <td><?= $row->kecamatan ?></td>
                     <td><?= $row->kelurahan ?></td>
                     <td>
-                        <a href="<?= url($url . '&ubah&id=' . $row->id_kelurahan) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Ubah</a>
-                        <a href="<?= url($url . '&hapus&id=' . $row->id_kelurahan) ?>" class="btn btn-danger" onclick="return confirm('Hapus Data?')"> <i class="fa fa-trash"></i>Hapus</a>
+                        <a href="<?= url($url . '&ubah&id=' . $row->nik) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Ubah</a>
+                        <a href="<?= url($url . '&hapus&id=' . $row->nik) ?>" class="btn btn-danger" onclick="return confirm('Hapus Data?')"> <i class="fa fa-trash"></i>Hapus</a>
                     </td>
                 </tr>
             <?php
