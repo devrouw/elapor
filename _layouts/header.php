@@ -75,7 +75,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profil</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Keluar</a>
+                  <a href="<?=url('logout')?>" class="btn btn-default btn-flat">Keluar</a>
                 </div>
               </li>
             </ul>
