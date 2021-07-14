@@ -38,18 +38,36 @@ if (isset($_GET['hapus'])) {
 <?php }
 
 if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
-    $id_kelurahan = "";
-    $kd_kelurahan = "";
-    $nm_kelurahan = "";
-    $geojson_kelurahan = "";
+    $nama_lengkap = "";
+    $tempat_lahir = "";
+    $tgl_lahir = "";
+    $jenis_kelamin = "";
+    $alamat = "";
+    $no_telpon = "";
+    $kode_pos = "";
+    $kabupaten = "";
+    $kecamatan = "";
+    $kelurahan = "";
+    $email = "";
+    $password = "";
 
     if (isset($_GET['ubah']) and isset($_GET['nik'])) {
+        $db->join('tb_akun b','a.nik=b.nik');
         $db->where('nik', $_GET['nik']);
         $row = $db->ObjectBuilder()->getOne('tb_masyarakat');
         if ($db->count > 0) {
-            $id_kelurahan = $row->nama_lengkap;
-            $kd_kelurahan = $row->tempat_lahir;
-            $nm_kelurahan = $row->tgl_lahir;
+            $nama_lengkap = $row->nama_lengkap;
+            $tempat_lahir = $row->tempat_lahir;
+            $tgl_lahir = $row->tgl_lahir;
+            $jenis_kelamin = $row->jenis_kelamin;
+            $alamat = $row->alamat;
+            $no_telpon = $row->no_telpon;
+            $kode_pos = $row->kode_pos;
+            $kabupaten = $row->kabupaten;
+            $kecamatan = $row->kecamatan;
+            $kelurahan = $row->kelurahan;
+            $email = $row->email;
+            $password = $row->password;
         }
     }
 ?>
@@ -64,7 +82,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             <label>Nama Lengkap</label>
             <div class="row">
             <div class="col-md-10">
-            <?= input_file('foto_bangunan', $foto_bangunan) ?>
+            <?= input_text('nama_lengkap', $nama_lengkap) ?>
             </div>
             </div>
         </div>
@@ -72,19 +90,23 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             <div class="row">
             <div class="col-md-5">
             <label>Tempat Lahir</label>
-            <?= input_text('lng', $lng) ?>
+            <?= input_text('tempat_lahir', $tempat_lahir) ?>
             </div>
             <div class="col-md-5">
             <label>Tanggal Lahir</label>
-            <?= input_text('lat', $lat) ?>
+            <?= input_text('tgl_lahir', $tgl_lahir) ?>
             </div>
             </div>
         </div>
         <div class="form-group">
-            <label>Jenis Kelamin</label>
             <div class="row">
-            <div class="col-md-10">
-            <?= input_text('jenis_bangunan', $jenis_bangunan) ?>
+            <div class="col-md-5">
+            <label>Jenis Kelamin</label>
+            <?= input_text('jenis_kelamin', $jenis_kelamin) ?>
+            </div>
+            <div class="col-md-5">
+            <label>No Telepon</label>
+            <?= input_text('no_telpon', $no_telpon) ?>
             </div>
             </div>
         </div>
@@ -97,26 +119,26 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             </div>
         </div>
         <div class="form-group">
-            <label>Nomor Telpon</label>
             <div class="row">
-            <div class="col-md-10">
-            <?= input_text('nomor_rumah', $nomor_rumah) ?>
-            </div>
-            </div>
-        </div>
-        <div class="form-group">
+            <div class="col-md-5">
             <label>Kode Pos</label>
-            <div class="row">
-            <div class="col-md-10">
-            <?= input_text('luas_tanah', $luas_tanah) ?>
+            <?= input_text('kode_pos', $kode_pos) ?>
+            </div>
+            <div class="col-md-5">
+            <label>Kabupaten</label>
+            <?= input_text('kabupaten', $kabupaten) ?>
             </div>
             </div>
         </div>
         <div class="form-group">
-            <label>Kabupaten</label>
             <div class="row">
-            <div class="col-md-10">
-            <?= input_text('luas_bangunan', $luas_bangunan) ?>
+            <div class="col-md-5">
+            <label>Kecamatan</label>
+            <?= input_text('kecamatan', $kecamatan) ?>
+            </div>
+            <div class="col-md-5">
+            <label>Kelurahan</label>
+            <?= input_text('kelurahan', $kelurahan) ?>
             </div>
             </div>
         </div>
@@ -127,7 +149,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             <label>Email</label>
             <div class="row">
             <div class="col-md-10">
-            <?= input_file('foto_bangunan', $foto_bangunan) ?>
+            <?= input_text('email', $email) ?>
             </div>
             </div>
         </div>
@@ -135,7 +157,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             <label>Password</label>
             <div class="row">
             <div class="col-md-10">
-            <?= input_file('foto_bangunan', $foto_bangunan) ?>
+            <?= input_password('password', $password) ?>
             </div>
             </div>
         </div>
