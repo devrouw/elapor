@@ -10,7 +10,7 @@ $setTemplate = true;
 <!-- Boxes untuk data aduan -->
 <div class="row align-items-center">
     <!--<div class="col-lg-1 "></div>-->
-    <div class="col-md-auto"></div>
+    <div class="col-md-1"></div>
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-aqua text-center">
@@ -21,7 +21,7 @@ $setTemplate = true;
             <!-- <div class="icon">
               <i class="ion ion-bag"></i>
             </div> -->
-            <a href="#" class="small-box-footer">Selengkapnya<i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?=url('data_pengaduan')?>" class="small-box-footer">Selengkapnya<i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -46,7 +46,7 @@ $setTemplate = true;
             <a href="#" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <div class="col-md-auto"></div>
+        <div class="col-md-1"></div>
         <!--<div class="col-lg-2"></div>-->
         </div>
     <?= content_close() ?>

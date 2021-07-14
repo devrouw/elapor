@@ -1,7 +1,7 @@
 <?php
-$title = 'Data Warga';
+$title = 'Data Perkembangan Perbaikan';
 $judul = $title;
-$url = 'warga';
+$url = 'data_perbaikan';
 $setTemplate = true;
 
 if (isset($_POST['simpan'])) {
@@ -135,28 +135,31 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
         <thead>
             <tr>
                 <th>No</th>
-                <th>Username</th>
-                <th>Password</th>
-                <th>Nama Lengkap</th>
-                <th>Alamat</th>
-                <th>No.Telp</th>
-                <th>No.Rumah</th>
-                <th>Aksi</th>
+                <th>Nama Pelapor</th>
+                <th>Kategori</th>
+                <th>Foto Pengaduan</th>
+                <th>Foto Perkembangan</th>
+                <th>Keterangan</th>
+                <th>Status</th>
+                <th>Opsi</th>
             </tr>
         </thead>
         <tbody>
             <?php
             $no = 1;
-            $get = $db->ObjectBuilder()->get('tb_warga');
+            $db->join('tb_perbaikan b','a.id_perbaikan=b.id','LEFT');
+            $db->join('tb_masyarakat c','a.nik=c.nik','LEFT');
+            $db->where('a.status', '1');
+            $get = $db->ObjectBuilder()->get('tb_pengaduan a');
             foreach ($get as $row) { ?>
                 <tr>
                     <td><?= $no ?></td>
-                    <td><?= $row->username ?></td>
-                    <td><?= $row->password ?></td>
                     <td><?= $row->nama_lengkap ?></td>
-                    <td><?= $row->alamat ?></td>
-                    <td><?= $row->no_telp ?></td>
-                    <td><?= $row->no_rumah ?></td>
+                    <td><?= $row->kategori ?></td>
+                    <td><?= $row->foto_aduan ?></td>
+                    <td><?= $row->foto_perbaikan ?></td>
+                    <td><?= $row->keterangan ?></td>
+                    <td><?= $row->status_perbaikan ?></td>
                     <td>
                         <a href="<?= url($url . '&ubah&id=' . $row->id_warga) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Ubah</a>
                         <a href="<?= url($url . '&hapus&id=' . $row->id_warga) ?>" class="btn btn-danger" onclick="return confirm('Hapus Data?')"> <i class="fa fa-trash"></i>Hapus</a>

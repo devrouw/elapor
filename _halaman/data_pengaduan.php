@@ -213,8 +213,8 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
                     <td><?= $row->lat ?>,<?= $row->lng ?></td>
                     <td>Belum ditangani</td>
                     <td>
-                        <a href="<?= url($url . '&ubah&id=' . $row->id_bangunan) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Ubah</a>
-                        <a href="<?= url($url . '&hapus&id=' . $row->id_bangunan) ?>" class="btn btn-danger" onclick="return confirm('Hapus Data?')"> <i class="fa fa-trash"></i>Hapus</a>
+                        <a href="<?= url($url . '&ubah&id=' . $row->id_bangunan) ?>" class="btn btn-success"> <i class="fa fa-edit"></i>Terima</a>
+                        <a href="<?= url($url . '&hapus&id=' . $row->id_bangunan) ?>" class="btn btn-danger" onclick="return confirm('Hapus Data?')"> <i class="fa fa-trash"></i>Tolak</a>
                     </td>
                 </tr>
             <?php
