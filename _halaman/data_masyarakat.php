@@ -149,25 +149,6 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
         </div>
         </div>
     </form>
-    <form method="post" enctype="multipart/form-data">
-        <?= input_hidden('nik', $nik) ?>
-        <div class="form-group">
-            <label>Kode Kelurahan</label>
-            <?= input_text('kd_kelurahan', $kd_kelurahan) ?>
-        </div>
-        <div class="form-group">
-            <label>Nama Kelurahan</label>
-            <?= input_text('nm_kelurahan', $nm_kelurahan) ?>
-        </div>
-        <div class="form-group">
-            <label>GeoJSON</label>
-            <?= input_file('geojson_kelurahan', $geojson_kelurahan) ?>
-        </div>
-        <div class="form-group">
-            <button type="submit" name="simpan" class="btn btn-info"> <i class="fa fa-save"></i>Simpan</button>
-            <a href="<?= url($url) ?>" class="btn btn-danger"> <i class="fa fa-reply"></i>Kembali</a>
-        </div>
-    </form>
     <?= content_close() ?>
 <?php } else { ?>
 
