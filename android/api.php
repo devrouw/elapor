@@ -122,9 +122,9 @@ case "input_aduan":
     $id_dinas = $_POST['id_dinas'];
 
     $query = "INSERT INTO tb_pengaduan(
-        foto_aduan,pesan,no_telpon,lng,lat,kategori,id_dinas,nik
+        foto_aduan,pesan,no_telpon,lng,lat,kategori,id_dinas,nik,status
     ) VALUES(
-        '$foto_aduan','$pesan','$no_telpon','$lng','$lat','$kategori','$id_dinas','$nik'
+        '$foto_aduan','$pesan','$no_telpon','$lng','$lat','$kategori','$id_dinas','$nik','0'
     )";
     $message = 'Data Berhasil diinput!';
     
