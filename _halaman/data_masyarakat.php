@@ -52,7 +52,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     $password = "";
 
     if (isset($_GET['ubah']) and isset($_GET['nik'])) {
-        $db->join('tb_akun b','a.nik=b.nik');
+        $db->join('tb_akun b','a.nik=b.nik','INNER');
         $db->where('nik', $_GET['nik']);
         $row = $db->ObjectBuilder()->getOne('tb_masyarakat');
         if ($db->count > 0) {

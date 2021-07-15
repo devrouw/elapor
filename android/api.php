@@ -132,5 +132,16 @@ case "input_aduan":
 die();
 break;
 
+#----------------------------------------------------------------------------------------------------------------------------------------
+case "list_dinas":
+    $type_query = "show";
+
+    $query = "SELECT * FROM tb_dinas";
+    $message = 'Data Ada!';
+    
+    include './res.php';
+die();
+break;
+
     }
 }
