@@ -75,7 +75,12 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     $email = "";
     $password = "";
 
-    if (isset($_GET['ubah']) and isset($_GET['nik'])) {
+    if (isset($_GET['ubah']) and isset($_GET['nik'])) { ?>
+        <script type="text/javascript">
+        var element = document.querySelector("input.nik");
+        element.style.display = 'none';
+        </script>
+        <?php
         $db->where('nik', $_GET['nik']);
         $row = $db->ObjectBuilder()->getOne('tb_masyarakat');
         if ($db->count > 0) {
@@ -99,7 +104,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
 
     <?= content_open('Form Data Masyarakat') ?>
     <form method="post" enctype="multipart/form-data">
-        <?= input_hidden('nik', $nik) ?>
+        <?= input_text('nik', $nik) ?>
         <div class="row">
         <div class="col-md-6">
         

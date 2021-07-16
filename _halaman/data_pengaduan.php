@@ -181,7 +181,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
 <?php } else { ?>
 
     <?= content_open('Data Pengaduan') ?>
-    <a href="<?= url($url . '&tambah') ?>" class="btn btn-success"><i class="fa fa-plus"></i>Tambah</a>
+    <!-- <a href="<?= url($url . '&tambah') ?>" class="btn btn-success"><i class="fa fa-plus"></i>Tambah</a> -->
     <hr>
     <table class="table table-bordered">
         <thead>
@@ -207,13 +207,13 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
                     <td><?= $no ?></td>
                     <td><?= $row->nama_lengkap ?></td>
                     <td><?= $row->kategori ?></td>
-                    <td><img src="<?=assets('unggah/'.$row->foto_aduan)?>" style="width:50px;height:50px;"></td>
+                    <td><div class="zoom"><img src="<?=assets('unggah/'.$row->foto_aduan)?>" style="width:50px;height:50px;"></div></td>
                     <td><?= $row->pesan ?></td>
                     <td><?= $row->no_telpon ?></td>
                     <td><a href="http://maps.google.com/maps?q=<?= $row->lat ?>,<?= $row->lng ?>" target="_BLANK"><?= $row->lat ?>,<?= $row->lng ?></a></td>
                     <td>Belum ditangani</td>
                     <td>
-                        <a href="<?= url($url . '&ubah&id=' . $row->id_bangunan) ?>" class="btn btn-success"> <i class="fa fa-edit"></i>Terima</a>
+                        <a href="<?= url($url . '&ubah&id=' . $row->id_bangunan) ?>" class="btn btn-success"> <i class="fa fa-edit"></i>Proses</a>
                         <a href="<?= url($url . '&hapus&id=' . $row->id_bangunan) ?>" class="btn btn-danger" onclick="return confirm('Hapus Data?')"> <i class="fa fa-trash"></i>Tolak</a>
                     </td>
                 </tr>

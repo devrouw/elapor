@@ -42,4 +42,17 @@
 	background: url('assets/js/leaflet-panel-layers-master/examples/images/icons/bar.png') center center no-repeat;
 }
 </style>
+<style>
+.zoom {
+  /*background-color: green;*/
+  transition: transform .4s; /* Animation */
+  width: 50;
+  height: 50;
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  transform: scale(6); /* (150% zoom)*/
+}
+</style>
 </head>
