@@ -112,6 +112,7 @@ break;
 #----------------------------------------------------------------------------------------------------------------------------------------
 case "input_aduan":
     $type_query = "input";
+    $nama_foto = $_POST['nama_foto'];
     $foto_aduan = $_POST['foto_aduan'];
     $pesan = $_POST['pesan'];
     $no_telpon = $_POST['no_telpon'];
@@ -120,11 +121,14 @@ case "input_aduan":
     $kategori = $_POST['kategori'];
     $nik = $_POST['nik'];
     $id_dinas = $_POST['id_dinas'];
+    $realImage = base64_decode($foto_aduan);
+
+    file_put_contents($nama_foto,$realImage);
 
     $query = "INSERT INTO tb_pengaduan(
         foto_aduan,pesan,no_telpon,lng,lat,kategori,id_dinas,nik,status
     ) VALUES(
-        '$foto_aduan','$pesan','$no_telpon','$lng','$lat','$kategori','$id_dinas','$nik','0'
+        '$nama_foto','$pesan','$no_telpon','$lng','$lat','$kategori','$id_dinas','$nik','0'
     )";
     $message = 'Data Berhasil diinput!';
     
