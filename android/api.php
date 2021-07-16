@@ -123,7 +123,7 @@ case "input_aduan":
     $id_dinas = $_POST['id_dinas'];
     $realImage = base64_decode($foto_aduan);
 
-    file_put_contents($nama_foto,$realImage);
+    file_put_contents("gambar/".$nama_foto,$realImage);
 
     $query = "INSERT INTO tb_pengaduan(
         foto_aduan,pesan,no_telpon,lng,lat,kategori,id_dinas,nik,status
