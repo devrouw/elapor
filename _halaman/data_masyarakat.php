@@ -5,6 +5,10 @@ $url = 'data_masyarakat';
 $setTemplate = true;
 
 if (isset($_POST['simpan'])) {
+    $file=upload('foto_profil','');
+    if($file!=false){
+        $data['foto_profil']=$file;
+    }
     if ($_POST['nik'] == "") {
         $data['nama_lengkap'] = $_POST['nama_lengkap'];
         $data['tempat_lahir'] = $_POST['tempat_lahir'];
@@ -18,7 +22,6 @@ if (isset($_POST['simpan'])) {
         $data['kabupaten'] = $_POST['kabupaten'];
         $data['kecamatan'] = $_POST['kecamatan'];
         $data['kelurahan'] = $_POST['kelurahan'];
-        $data['foto_profil'] = $_POST['foto_profil'];
         $db->insert("tb_masyarakat", $data);
 ?>
         <script type="text/javascript">
@@ -39,7 +42,6 @@ if (isset($_POST['simpan'])) {
         $data['kabupaten'] = $_POST['kabupaten'];
         $data['kecamatan'] = $_POST['kecamatan'];
         $data['kelurahan'] = $_POST['kelurahan'];
-        $data['foto_profil'] = $_POST['foto_profil'];
         $db->where('nik', $_POST['nik']);
         $db->update("tb_masyarakat", $data);
     ?>
@@ -79,6 +81,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
         if ($db->count > 0) {
             $nik = $row->nik;
             $nama_lengkap = $row->nama_lengkap;
+            $foto_profil = $row->foto_profil;
             $tempat_lahir = $row->tempat_lahir;
             $tgl_lahir = $row->tgl_lahir;
             $jenis_kelamin = $row->jenis_kelamin;
@@ -177,10 +180,10 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
         <div class="form-group" class="">
             <label>Foto Profil</label>
             <div class="row">
-            <div class="col-md-5">
-            <img src="<?=assets('unggah/'.$row->foto_profil)?>" style="width:50px;height:50px;">
+            <div class="col-md-6">
+            <img src="<?=assets('unggah/'.$row->foto_profil)?>" style="width:80px;height:80px;">
             </div>
-            <div class="col-md-5">
+            <div class="col-md-4">
             <?= input_file('foto_profil', $foto_profil) ?>
             </div>
             </div>
