@@ -44,12 +44,23 @@ if (isset($_POST['simpan'])) {
     <?php }
 }
 
-if (isset($_GET['hapus'])) {
-    $db->where('id_bangunan', $_GET['id']);
-    $db->delete("tb_bangunan"); ?>
+if (isset($_GET['tolak'])) {
+    $data['status'] = '2';
+    $db->where('id', $_GET['id']);
+    $db->update("tb_pengaduan", $data); ?>
     <script type="text/javascript">
-        window.alert('Berhasil Dihapus');
-        window.location.href = "<?= url('bangunan') ?>";
+        window.alert('Data Aduan Ditolak');
+        window.location.href = "<?= url('data_pengaduan') ?>";
+    </script>
+<?php }
+
+if (isset($_GET['proses'])) {
+    $data['status'] = '1';
+    $db->where('id', $_GET['id']);
+    $db->update("tb_pengaduan", $data);?>
+    <script type="text/javascript">
+        window.alert('Data Aduan Berhasil Diproses');
+        window.location.href = "<?= url('data_pengaduan') ?>";
     </script>
 <?php }
 
@@ -213,8 +224,8 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
                     <td><a href="http://maps.google.com/maps?q=<?= $row->lat ?>,<?= $row->lng ?>" target="_BLANK"><?= $row->lat ?>,<?= $row->lng ?></a></td>
                     <td>Belum ditangani</td>
                     <td>
-                        <a href="<?= url($url . '&ubah&id=' . $row->id_bangunan) ?>" class="btn btn-success"> <i class="fa fa-edit"></i>Proses</a>
-                        <a href="<?= url($url . '&hapus&id=' . $row->id_bangunan) ?>" class="btn btn-danger" onclick="return confirm('Hapus Data?')"> <i class="fa fa-trash"></i>Tolak</a>
+                        <a href="<?= url($url . '&proses&id=' . $row->id) ?>" class="btn btn-success"> <i class="fa fa-edit"></i>Proses</a>
+                        <a href="<?= url($url . '&tolak&id=' . $row->id) ?>" class="btn btn-danger" onclick="return confirm('Hapus Data?')"> <i class="fa fa-trash"></i>Tolak</a>
                     </td>
                 </tr>
             <?php

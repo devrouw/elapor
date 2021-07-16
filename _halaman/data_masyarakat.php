@@ -77,8 +77,14 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
 
     if (isset($_GET['ubah']) and isset($_GET['nik'])) { ?>
         <script type="text/javascript">
-        var element = document.querySelector("input.nik");
-        element.style.display = 'none';
+        var element = document.querySelector("div.form-group");
+
+document.querySelector('select[name=category]').addEventListener('change', function(){
+  if(this.value == 'Laptop')
+    element.style.display = 'none';
+  else
+    element.style.display = 'block';
+})
         </script>
         <?php
         $db->where('nik', $_GET['nik']);
@@ -104,7 +110,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
 
     <?= content_open('Form Data Masyarakat') ?>
     <form method="post" enctype="multipart/form-data">
-        <?= input_text('nik', $nik) ?>
+        <?= input_hidden('nik', $nik) ?>
         <div class="row">
         <div class="col-md-6">
         
