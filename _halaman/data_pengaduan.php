@@ -213,6 +213,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             <?php
             $no = 1;
             $db->join('tb_masyarakat b','a.nik=b.nik','LEFT');
+            $db->where('a.status', '0');
             $get = $db->ObjectBuilder()->get('tb_pengaduan a');
             foreach ($get as $row) { ?>
                 <tr>
@@ -225,7 +226,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
                     <td><a href="http://maps.google.com/maps?q=<?= $row->lat ?>,<?= $row->lng ?>" target="_BLANK"><?= $row->lat ?>,<?= $row->lng ?></a></td>
                     <td>Belum ditangani</td>
                     <td>
-                        <a href="<?= url($url . '&proses&id=' . $row->id) ?>" class="btn btn-success" id="tes"> <i class="fa fa-edit"></i>Proses</a>
+                        <a href="<?= url($url . '&proses&id=' . $row->id) ?>" class="btn btn-success" onclick="return confirm('Proses Data?')"> <i class="fa fa-edit"></i>Proses</a>
                         <a href="<?= url($url . '&tolak&id=' . $row->id) ?>" class="btn btn-danger" onclick="return confirm('Tolak Data?')"> <i class="fa fa-trash"></i>Tolak</a>
                     </td>
                 </tr>
