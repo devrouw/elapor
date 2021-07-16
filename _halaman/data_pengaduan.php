@@ -210,7 +210,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
                     <td><img src="<?=assets('unggah/'.$row->foto_aduan)?>" style="width:50px;height:50px;"></td>
                     <td><?= $row->pesan ?></td>
                     <td><?= $row->no_telpon ?></td>
-                    <td><?= $row->lat ?>,<?= $row->lng ?></td>
+                    <td><a href="<?=assets('unggah/geojson/'.$row->geojson_kelurahan)?>" target="_BLANK"><?=$row->geojson_kelurahan?></a><?= $row->lat ?>,<?= $row->lng ?></td>
                     <td>Belum ditangani</td>
                     <td>
                         <a href="<?= url($url . '&ubah&id=' . $row->id_bangunan) ?>" class="btn btn-success"> <i class="fa fa-edit"></i>Terima</a>

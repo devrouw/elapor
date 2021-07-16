@@ -102,7 +102,7 @@ case "login":
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM tb_akun JOIN tb_masyarakat ON tb_akun.nik = tb_masyarakat.nik WHERE tb_akun.email='$email' AND tb_akun.password='$password'";
+    $query = "SELECT * FROM tb_masyarakat WHERE email='$email' AND password='$password'";
     $message = 'Data Ada!';
     
     include './res.php';

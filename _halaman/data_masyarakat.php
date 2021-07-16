@@ -5,35 +5,57 @@ $url = 'data_masyarakat';
 $setTemplate = true;
 
 if (isset($_POST['simpan'])) {
-    if ($_POST['id_kelurahan'] == "") {
-        $data['kd_kelurahan'] = $_POST['kd_kelurahan'];
-        $data['nm_kelurahan'] = $_POST['nm_kelurahan'];
-        $db->insert("tb_kelurahan", $data);
+    if ($_POST['nik'] == "") {
+        $data['nama_lengkap'] = $_POST['nama_lengkap'];
+        $data['tempat_lahir'] = $_POST['tempat_lahir'];
+        $data['tgl_lahir'] = $_POST['tgl_lahir'];
+        $data['jenis_kelamin'] = $_POST['jenis_kelamin'];
+        $data['alamat'] = $_POST['alamat'];
+        $data['email'] = $_POST['email'];
+        $data['password'] = $_POST['password'];
+        $data['no_telpon'] = $_POST['no_telpon'];
+        $data['kode_pos'] = $_POST['kode_pos'];
+        $data['kabupaten'] = $_POST['kabupaten'];
+        $data['kecamatan'] = $_POST['kecamatan'];
+        $data['kelurahan'] = $_POST['kelurahan'];
+        $data['foto_profil'] = $_POST['foto_profil'];
+        $db->insert("tb_masyarakat", $data);
 ?>
         <script type="text/javascript">
             window.alert('Berhasil Disimpan');
-            window.location.href = "<?= url('kelurahan') ?>";
+            window.location.href = "<?= url('data_masyarakat') ?>";
         </script>
     <?php
     } else {
-        $data['kd_kelurahan'] = $_POST['kd_kelurahan'];
-        $data['nm_kelurahan'] = $_POST['nm_kelurahan'];
-        $db->where('id_kelurahan', $_POST['id_kelurahan']);
-        $db->update("tb_kelurahan", $data);
+        $data['nama_lengkap'] = $_POST['nama_lengkap'];
+        $data['tempat_lahir'] = $_POST['tempat_lahir'];
+        $data['tgl_lahir'] = $_POST['tgl_lahir'];
+        $data['jenis_kelamin'] = $_POST['jenis_kelamin'];
+        $data['alamat'] = $_POST['alamat'];
+        $data['email'] = $_POST['email'];
+        $data['password'] = $_POST['password'];
+        $data['no_telpon'] = $_POST['no_telpon'];
+        $data['kode_pos'] = $_POST['kode_pos'];
+        $data['kabupaten'] = $_POST['kabupaten'];
+        $data['kecamatan'] = $_POST['kecamatan'];
+        $data['kelurahan'] = $_POST['kelurahan'];
+        $data['foto_profil'] = $_POST['foto_profil'];
+        $db->where('nik', $_POST['nik']);
+        $db->update("tb_masyarakat", $data);
     ?>
         <script type="text/javascript">
             window.alert('Berhasil Diubah');
-            window.location.href = "<?= url('kelurahan') ?>";
+            window.location.href = "<?= url('data_masyarakat') ?>";
         </script>
     <?php }
 }
 
 if (isset($_GET['hapus'])) {
-    $db->where('id_kelurahan', $_GET['id']);
-    $db->delete("tb_kelurahan"); ?>
+    $db->where('nik', $_GET['nik']);
+    $db->delete("tb_masyarakat"); ?>
     <script type="text/javascript">
         window.alert('Berhasil Dihapus');
-        window.location.href = "<?= url('kelurahan') ?>";
+        window.location.href = "<?= url('data_masyarakat') ?>";
     </script>
 <?php }
 
@@ -52,7 +74,6 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     $password = "";
 
     if (isset($_GET['ubah']) and isset($_GET['nik'])) {
-        $db->join('tb_akun b','a.nik=b.nik','INNER');
         $db->where('nik', $_GET['nik']);
         $row = $db->ObjectBuilder()->getOne('tb_masyarakat');
         if ($db->count > 0) {
@@ -102,7 +123,14 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             <div class="row">
             <div class="col-md-5">
             <label>Jenis Kelamin</label>
-            <?= input_text('jenis_kelamin', $jenis_kelamin) ?>
+            <?php
+	    		$op['Perempuan']='Perempuan';
+                $op['Laki-Laki']='Laki-Laki';
+	    		// foreach ($db->ObjectBuilder()->get('tb_warga') as $row) {
+	    		// 	$op[$row->id_warga]=$row->username;
+	    		// }
+	    	?>
+	    		<?=select('jenis_kelamin',$op,$jenis_kelamin)?>
             </div>
             <div class="col-md-5">
             <label>No Telepon</label>
