@@ -59,6 +59,7 @@ if (isset($_GET['proses'])) {
     $db->where('id', $_GET['id']);
     $db->update("tb_pengaduan", $data);?>
     <script type="text/javascript">
+        document.getElementById('tes').style.display = 'none';
         window.alert('Data Aduan Berhasil Diproses');
         window.location.href = "<?= url('data_pengaduan') ?>";
     </script>
@@ -224,8 +225,8 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
                     <td><a href="http://maps.google.com/maps?q=<?= $row->lat ?>,<?= $row->lng ?>" target="_BLANK"><?= $row->lat ?>,<?= $row->lng ?></a></td>
                     <td>Belum ditangani</td>
                     <td>
-                        <a href="<?= url($url . '&proses&id=' . $row->id) ?>" class="btn btn-success"> <i class="fa fa-edit"></i>Proses</a>
-                        <a href="<?= url($url . '&tolak&id=' . $row->id) ?>" class="btn btn-danger" onclick="return confirm('Hapus Data?')"> <i class="fa fa-trash"></i>Tolak</a>
+                        <a href="<?= url($url . '&proses&id=' . $row->id) ?>" class="btn btn-success" id="tes"> <i class="fa fa-edit"></i>Proses</a>
+                        <a href="<?= url($url . '&tolak&id=' . $row->id) ?>" class="btn btn-danger" onclick="return confirm('Tolak Data?')"> <i class="fa fa-trash"></i>Tolak</a>
                     </td>
                 </tr>
             <?php
