@@ -207,7 +207,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
                     <td><?= $no ?></td>
                     <td><?= $row->nama_lengkap ?></td>
                     <td><?= $row->kategori ?></td>
-                    <td><img src="<?=assets('unggah/bangunan/'.$row->foto_aduan)?>" style="width:50px;height:50px;"></td>
+                    <td><img src="<?=assets('android/gambar/'.$row->foto_aduan)?>" style="width:50px;height:50px;"></td>
                     <td><?= $row->pesan ?></td>
                     <td><?= $row->no_telpon ?></td>
                     <td><?= $row->lat ?>,<?= $row->lng ?></td>
