@@ -77,6 +77,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
         $db->where('nik', $_GET['nik']);
         $row = $db->ObjectBuilder()->getOne('tb_masyarakat');
         if ($db->count > 0) {
+            $nik = $row->nik;
             $nama_lengkap = $row->nama_lengkap;
             $tempat_lahir = $row->tempat_lahir;
             $tgl_lahir = $row->tgl_lahir;
@@ -173,6 +174,17 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
         </div>
         <div class="col-md-6">
         <h3>Data Akun</h3>
+        <div class="form-group" class="">
+            <label>Foto Profil</label>
+            <div class="row">
+            <div class="col-md-5">
+            <img src="<?=assets('unggah/'.$row->foto_profil)?>" style="width:50px;height:50px;">
+            </div>
+            <div class="col-md-5">
+            <?= input_file('foto_profil', $foto_profil) ?>
+            </div>
+            </div>
+        </div>
         <div class="form-group" class="">
             <label>Email</label>
             <div class="row">
