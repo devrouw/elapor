@@ -163,5 +163,17 @@ case "list_aduan":
 die();
 break;
 
+#----------------------------------------------------------------------------------------------------------------------------------------
+case "biodata":
+    $type_query = "show";
+    $nik = $_POST['nik'];
+
+    $query = "SELECT * FROM tb_masyarakat WHERE nik='$nik'";
+    $message = 'Data Ada!';
+    
+    include './res.php';
+die();
+break;
+
     }
 }
