@@ -100,6 +100,86 @@ case "daftar":
 die();
 break;
 
+
+#----------------------------------------------------------------------------------------------------------------------------------------
+case "edit_biodata":
+    $type_query = "update";
+    $nik = $_POST['nik'];
+    $nama_lengkap = $_POST['nama_lengkap'];
+    $tempat_lahir = $_POST['tempat_lahir'];
+    $tanggal_lahir = $_POST['tanggal_lahir'];
+    $jenis_kelamin = $_POST['jenis_kelamin'];
+    $alamat = $_POST['alamat'];
+    $email = $_POST['email'];
+    $no_telepon = $_POST['no_telepon'];
+    $kode_pos = $_POST['kode_pos'];
+    $kabupaten = $_POST['kabupaten'];
+    $kecamatan = $_POST['kecamatan'];
+    $kelurahan = $_POST['kelurahan'];
+    $foto_profil = $_POST['foto_profil'];
+    $nama_foto = $_POST['nama_foto'];
+
+    if($nama_foto == ""){
+        $query = "UPDATE tb_masyarakat SET
+        nama_lengkap = '$nama_lengkap',
+        tempat_lahir = '$tempat_lahir',
+        tgl_lahir = '$tanggal_lahir',
+        jenis_kelamin = '$jenis_kelamin',
+        alamat = '$alamat',
+        email = '$email',
+        no_telpon = '$no_telepon',
+        kode_pos = '$kode_pos',
+        kabupaten = '$kabupaten',
+        kecamatan = '$kecamatan',
+        kelurahan = '$kelurahan'
+        WHERE nik = '$nik'";
+    }else{
+        $realImage = base64_decode($foto_profil);
+        $query = "UPDATE tb_masyarakat SET
+        nama_lengkap = '$nama_lengkap',
+        tempat_lahir = '$tempat_lahir',
+        tgl_lahir = '$tanggal_lahir',
+        jenis_kelamin = '$jenis_kelamin',
+        alamat = '$alamat',
+        email = '$email',
+        no_telpon = '$no_telepon',
+        kode_pos = '$kode_pos',
+        kabupaten = '$kabupaten',
+        kecamatan = '$kecamatan',
+        kelurahan = '$kelurahan',
+        foto_profil = '$nama_foto'
+        WHERE nik = '$nik'";
+    }
+    
+
+    $hasil = mysqli_multi_query($con,$query);
+    if($hasil){
+        if($nama_foto != ""){
+            file_put_contents("../assets/unggah/".$nama_foto,$realImage);
+        }
+        
+        $response["code"] = 200;
+        $response["status"] = "OK";
+        $response["data"] = "data berhasil diinput.";
+        $response["message"] = $message;
+        echo json_encode($response);
+    }else
+    {
+        $response["code"] = 404;
+        $response["status"] = "error";
+        $response["data"] = null;
+        $response["message"] = "input error $message";
+        
+        echo json_encode($response);
+
+    }
+
+    $message = 'Data Berhasil Diubah!';
+    
+    // include './res.php';
+die();
+break;
+
 #----------------------------------------------------------------------------------------------------------------------------------------
 case "login":
     $type_query = "show";
