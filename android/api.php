@@ -151,5 +151,17 @@ case "list_dinas":
 die();
 break;
 
+#----------------------------------------------------------------------------------------------------------------------------------------
+case "list_aduan":
+    $type_query = "show";
+    $nik = $_POST['nik'];
+
+    $query = "SELECT * FROM tb_pengaduan WHERE nik='$nik'";
+    $message = 'Data Ada!';
+    
+    include './res.php';
+die();
+break;
+
     }
 }
