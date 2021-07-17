@@ -46,32 +46,31 @@ if (isset($_GET['hapus'])) {
 <?php }
 
 if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
-    $id_warga = "";
-    $username = "";
-    $password = "";
-    $nama_lengkap = "";
-    $alamat = "";
-    $no_telp = "";
-    $no_rumah = "";
+    $id = "";
+    $foto_aduan = "";
+    $pesan = "";
+    $no_telpon = "";
+    $lng = "";
+    $lat = "";
+    $kategori = "";
 
     if (isset($_GET['ubah']) and isset($_GET['id'])) {
-        $db->where('id_warga', $_GET['id']);
-        $row = $db->ObjectBuilder()->getOne('tb_warga');
+        $db->where('id', $_GET['id']);
+        $row = $db->ObjectBuilder()->getOne('tb_pengaduan');
         if ($db->count > 0) {
-            $id_warga = $row->id_warga;
-            $username = $row->username;
-            $password = $row->password;
-            $nama_lengkap = $row->nama_lengkap;
-            $alamat = $row->alamat;
-            $no_telp = $row->no_telp;
-            $no_rumah = $row->no_rumah;
+            $id = $row->id;
+            $foto_aduan = $row->foto_aduan;
+            $no_telpon = $row->no_telpon;
+            $lng = $row->lng;
+            $lat = $row->lat;
+            $kategori = $row->kategori;
         }
     }
 ?>
 
-    <?= content_open('Form Data Akun Warga') ?>
+    <?= content_open('Form Data Perbaikan') ?>
     <form method="post" enctype="multipart/form-data">
-        <?= input_hidden('id_warga', $id_warga) ?>
+        <?= input_hidden('id', $id) ?>
         <div class="form-group" class="">
             <label>Username</label>
             <div class="row">
@@ -129,7 +128,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
 <?php } else { ?>
 
     <?= content_open('Data Warga') ?>
-    <a href="<?= url($url . '&tambah') ?>" class="btn btn-success"><i class="fa fa-plus"></i>Tambah</a>
+    
     <hr>
     <table class="table table-bordered">
         <thead>
@@ -156,12 +155,12 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
                     <td><?= $no ?></td>
                     <td><?= $row->nama_lengkap ?></td>
                     <td><?= $row->kategori ?></td>
-                    <td><?= $row->foto_aduan ?></td>
+                    <td><div class="zoom"><img src="<?=assets('unggah/'.$row->foto_aduan)?>" style="width:50px;height:50px;"></div></td>
                     <td><?= $row->foto_perbaikan ?></td>
                     <td><?= $row->keterangan ?></td>
                     <td><?= $row->status_perbaikan ?></td>
                     <td>
-                        <a href="<?= url($url . '&ubah&id=' . $row->id_warga) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Ubah</a>
+                        <a href="<?= url($url . '&ubah&id=' . $row->id) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Ubah</a>
                     </td>
                 </tr>
             <?php

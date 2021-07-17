@@ -37,14 +37,15 @@ case "daftar":
     INSERT INTO tb_masyarakat(
         nik,nama_lengkap,tempat_lahir,tgl_lahir,jenis_kelamin,alamat,email,password,no_telpon,kode_pos,kabupaten,kecamatan,kelurahan,foto_profil
     ) VALUES(
-        '$nik','$nama_lengkap','$tempat_lahir','$tanggal_lahir','$jenis_kelamin','$alamat','$email','$password','$no_telepon','$kode_pos','$kabupaten','$kecamatan','$kelurahan','$foto_profil'
-    );
-    INSERT INTO tb_akun(
-        email,password,nik
-    ) VALUES (
-        '$email','$s','$nik'
-    );
-    COMMIT;";
+        '$nik','$nama_lengkap','$tempat_lahir','$tanggal_lahir','$jenis_kelamin','$alamat','$email','$s','$no_telepon','$kode_pos','$kabupaten','$kecamatan','$kelurahan','$foto_profil'
+    )";
+
+    // INSERT INTO tb_akun(
+    //     email,password,nik
+    // ) VALUES (
+    //     '$email','$s','$nik'
+    // );
+    // COMMIT;
 
     $hasil = mysqli_multi_query($con,$query);
     if($hasil){
