@@ -35,8 +35,6 @@ case "daftar":
     $s = substr(str_shuffle(str_repeat("!@#$%^&*()0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 6)), 0, 6);
     $realImage = base64_decode($foto_profil);
 
-    file_put_contents("../assets/unggah/".$nama_foto,$realImage);
-
     $query = "INSERT INTO tb_masyarakat(
         nik,nama_lengkap,tempat_lahir,tgl_lahir,jenis_kelamin,alamat,email,password,no_telpon,kode_pos,kabupaten,kecamatan,kelurahan,foto_profil
     ) VALUES(
@@ -52,6 +50,8 @@ case "daftar":
 
     $hasil = mysqli_multi_query($con,$query);
     if($hasil){
+        file_put_contents("../assets/unggah/".$nama_foto,$realImage);
+        
         $response["code"] = 200;
         $response["status"] = "OK";
         $response["data"] = "data berhasil diinput.";
