@@ -30,14 +30,18 @@ case "daftar":
     $kecamatan = $_POST['kecamatan'];
     $kelurahan = $_POST['kelurahan'];
     $foto_profil = $_POST['foto_profil'];
+    $nama_foto = $_POST['nama_foto'];
     // $password = $_POST['password'];
     $s = substr(str_shuffle(str_repeat("!@#$%^&*()0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 6)), 0, 6);
+    $realImage = base64_decode($foto_profil);
+
+    file_put_contents("../assets/unggah/".$nama_foto,$realImage);
 
     $query = "BEGIN; 
     INSERT INTO tb_masyarakat(
         nik,nama_lengkap,tempat_lahir,tgl_lahir,jenis_kelamin,alamat,email,password,no_telpon,kode_pos,kabupaten,kecamatan,kelurahan,foto_profil
     ) VALUES(
-        '$nik','$nama_lengkap','$tempat_lahir','$tanggal_lahir','$jenis_kelamin','$alamat','$email','$s','$no_telepon','$kode_pos','$kabupaten','$kecamatan','$kelurahan','$foto_profil'
+        '$nik','$nama_lengkap','$tempat_lahir','$tanggal_lahir','$jenis_kelamin','$alamat','$email','$s','$no_telepon','$kode_pos','$kabupaten','$kecamatan','$kelurahan','$nama_foto'
     )";
 
     // INSERT INTO tb_akun(
