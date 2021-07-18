@@ -248,7 +248,7 @@ case "list_perbaikan":
     $type_query = "show";
     $nik = $_POST['nik'];
 
-    $query = "SELECT * FROM tb_perbaikan JOIN tb_pengaduan ON tb_perbaikan.id=tb_pengaduan.id_perbaikan WHERE tb_pengaduan.nik='$nik'";
+    $query = "SELECT * FROM tb_perbaikan JOIN tb_pengaduan ON tb_perbaikan.id=tb_pengaduan.id_perbaikan JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id WHERE tb_pengaduan.nik='$nik'";
     $message = 'Data Ada!';
     
     include './res.php';
