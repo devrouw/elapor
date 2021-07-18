@@ -256,6 +256,19 @@ die();
 break;
 
 #----------------------------------------------------------------------------------------------------------------------------------------
+case "detail_perbaikan":
+    $type_query = "show";
+    $nik = $_POST['nik'];
+    $id = $_POST['id'];
+
+    $query = "SELECT * FROM tb_perbaikan JOIN tb_pengaduan ON tb_perbaikan.id=tb_pengaduan.id_perbaikan JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id WHERE tb_perbaikan.id='$id'";
+    $message = 'Data Ada!';
+    
+    include './res.php';
+die();
+break;
+
+#----------------------------------------------------------------------------------------------------------------------------------------
 case "biodata":
     $type_query = "show";
     $nik = $_POST['nik'];
