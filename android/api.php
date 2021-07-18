@@ -261,7 +261,7 @@ case "detail_perbaikan":
     $nik = $_POST['nik'];
     $id = $_POST['id'];
 
-    $query = "SELECT * FROM tb_perbaikan JOIN tb_pengaduan ON tb_perbaikan.id=tb_pengaduan.id_perbaikan JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id WHERE tb_perbaikan.id='$id'";
+    $query = "SELECT * FROM tb_perbaikan JOIN tb_pengaduan ON tb_perbaikan.id=tb_pengaduan.id_perbaikan JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id JOIN tb_masyarakat ON tb_pengaduan.nik=tb_masyarakat.nik WHERE tb_perbaikan.id='$id'";
     $message = 'Data Ada!';
     
     include './res.php';
