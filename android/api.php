@@ -263,9 +263,10 @@ case "detail_perbaikan":
 
     if($id == "0"){
         $query = "SELECT * FROM tb_pengaduan LEFT JOIN tb_perbaikan ON tb_pengaduan.id_perbaikan=tb_perbaikan.id JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id JOIN tb_masyarakat ON tb_pengaduan.nik=tb_masyarakat.nik WHERE tb_pengaduan.id='$id_aduan'";
+    }else{
+        $query = "SELECT * FROM tb_perbaikan JOIN tb_pengaduan ON tb_perbaikan.id=tb_pengaduan.id_perbaikan JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id JOIN tb_masyarakat ON tb_pengaduan.nik=tb_masyarakat.nik WHERE tb_perbaikan.id='$id'";
     }
 
-    $query = "SELECT * FROM tb_perbaikan JOIN tb_pengaduan ON tb_perbaikan.id=tb_pengaduan.id_perbaikan JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id JOIN tb_masyarakat ON tb_pengaduan.nik=tb_masyarakat.nik WHERE tb_perbaikan.id='$id'";
     $message = 'Data Ada!';
     
     include './res.php';
