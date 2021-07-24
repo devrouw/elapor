@@ -204,15 +204,14 @@ case "input_aduan":
     $lat = $_POST['lat'];
     $kategori = $_POST['kategori'];
     $nik = $_POST['nik'];
-    $id_dinas = $_POST['id_dinas'];
     $realImage = base64_decode($foto_aduan);
 
     file_put_contents("../assets/unggah/".$nama_foto,$realImage);
 
     $query = "INSERT INTO tb_pengaduan(
-        foto_aduan,pesan,no_telpon,lng,lat,kategori,id_dinas,nik,status
+        foto_aduan,pesan,no_telpon,lng,lat,kategori,id_dinas,nik,status,id_perbaikan
     ) VALUES(
-        '$nama_foto','$pesan','$no_telpon','$lng','$lat','$kategori','$id_dinas','$nik','0'
+        '$nama_foto','$pesan','$no_telpon','$lng','$lat','$kategori','1','$nik','0','0'
     )";
     $message = 'Data Berhasil diinput!';
     
@@ -260,12 +259,13 @@ case "detail_perbaikan":
     $type_query = "show";
     $nik = $_POST['nik'];
     $id = $_POST['id'];
+    $id_aduan = $_POST['id_aduan'];
 
-    // if($id == ""){
+    if($id == "0"){
+        $query = "SELECT * FROM tb_pengaduan LEFT JOIN tb_perbaikan ON tb_pengaduan.id_perbaikan=tb_perbaikan.id JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id JOIN tb_masyarakat ON tb_pengaduan.nik=tb_masyarakat.nik WHERE tb_pengaduan.id='$id_aduan'";
+    }
 
-    // }
-
-    $query = "SELECT * FROM tb_perbaikan RIGHT JOIN tb_pengaduan ON tb_perbaikan.id=tb_pengaduan.id_perbaikan JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id JOIN tb_masyarakat ON tb_pengaduan.nik=tb_masyarakat.nik WHERE tb_perbaikan.id='$id'";
+    $query = "SELECT * FROM tb_perbaikan JOIN tb_pengaduan ON tb_perbaikan.id=tb_pengaduan.id_perbaikan JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id JOIN tb_masyarakat ON tb_pengaduan.nik=tb_masyarakat.nik WHERE tb_perbaikan.id='$id'";
     $message = 'Data Ada!';
     
     include './res.php';
