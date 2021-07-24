@@ -204,6 +204,7 @@ case "input_aduan":
     $lat = $_POST['lat'];
     $kategori = $_POST['kategori'];
     $nik = $_POST['nik'];
+    $id_dinas = $_POST['id_dinas'];
     $realImage = base64_decode($foto_aduan);
 
     file_put_contents("../assets/unggah/".$nama_foto,$realImage);
