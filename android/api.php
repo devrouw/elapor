@@ -47,7 +47,7 @@ case "daftar":
         $response["code"] = 200;
         $response["status"] = "OK";
         $response["data"] = "data berhasil diinput.";
-        $response["message"] = $message;
+        $response["message"] = "Berhasil Mendaftar!";
         $subject = 'Akun Anda Berhasil dibuat';
         echo json_encode($response);
 
@@ -83,7 +83,7 @@ case "daftar":
 
     }
 
-    $message = 'Data Berhasil Diinput!';
+    // $message = 'Data Berhasil Diinput!';
     
     // include './res.php';
 die();
