@@ -88,7 +88,7 @@ case "daftar":
         $response["code"] = 404;
         $response["status"] = "error";
         $response["data"] = null;
-        $response["message"] = "input error $message";
+        $response["message"] = "Gagal Mendaftar";
         
         echo json_encode($response);
 
