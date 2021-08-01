@@ -10,6 +10,8 @@
 <script src="<?=templates()?>dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?=templates()?>dist/js/demo.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()

@@ -230,7 +230,7 @@ document.querySelector('select[name=category]').addEventListener('change', funct
 
     <?= content_open('Data Masyarakat') ?>
     <hr>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped" id="example">
         <thead>
             <tr>
                 <th>No</th>
@@ -277,5 +277,10 @@ document.querySelector('select[name=category]').addEventListener('change', funct
             ?>
         </tbody>
     </table>
+    <script type="text/javascript">
+            $(document).ready(function() {
+    $('#example').DataTable();
+} );
+        </script>
     <?= content_close() ?>
 <?php } ?>
