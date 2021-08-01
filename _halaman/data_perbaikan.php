@@ -27,7 +27,7 @@ if (isset($_POST['simpan'])) {
         $data['foto_perbaikan'] = $_POST['foto_perbaikan'];
         $data['keterangan'] = $_POST['keterangan'];
         $data['status_perbaikan'] = "2";
-        $data['id_pengaduan'] = $_POST['id'];
+        $data['id_aduan'] = $_POST['id'];
         // $db->where('id', $_POST['id']);
         $db->insert("tb_perbaikan", $data);
     ?>
@@ -84,12 +84,12 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
         <div class="form-group">
             <label>Foto Pengaduan</label>
             <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-6">
             <a href="<?=assets('unggah/'.$row->foto_aduan)?>" target="_blank" rel="noopener noreferrer"><img src="<?=assets('unggah/'.$row->foto_aduan)?>" style="width:240px;height:150px;"></a>
             </div>
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
             <?= input_file('foto_aduan', $foto_aduan) ?>
-            </div>
+            </div> -->
             </div>
         </div>
         <div class="form-group">
@@ -99,7 +99,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             <a href="<?=assets('unggah/'.$row->foto_perbaikan)?>" target="_blank" rel="noopener noreferrer"><img src="<?=assets('unggah/'.$row->foto_perbaikan)?>" style="width:240px;height:150px;"></a>
             </div>
             <div class="col-md-3">
-            <?= input_file('foto_aduan', $foto_perbaikan) ?>
+            <?= input_file('foto_perbaikan', $foto_perbaikan) ?>
             </div>
             </div>
         </div>
