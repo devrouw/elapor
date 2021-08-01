@@ -244,7 +244,6 @@ document.querySelector('select[name=category]').addEventListener('change', funct
                 <th>Kode Pos</th>
                 <th>Kabupaten</th>
                 <th>Kecamatan</th>
-                <th>Kelurahan</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -265,7 +264,6 @@ document.querySelector('select[name=category]').addEventListener('change', funct
                     <td><?= $row->kode_pos ?></td>
                     <td><?= $row->kabupaten ?></td>
                     <td><?= $row->kecamatan ?></td>
-                    <td><?= $row->kelurahan ?></td>
                     <td>
                         <a href="<?= url($url . '&ubah&nik=' . $row->nik) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Ubah</a>
                         <a href="<?= url($url . '&hapus&nik=' . $row->nik) ?>" class="btn btn-danger" onclick="return confirm('Hapus Data?')"> <i class="fa fa-trash"></i>Hapus</a>

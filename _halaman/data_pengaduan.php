@@ -27,7 +27,7 @@ if (isset($_GET['proses'])) {
 
     <?= content_open('Data Pengaduan Masuk') ?>
     <hr>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped" id="example">
         <thead>
             <tr>
                 <th>No</th>
@@ -72,7 +72,7 @@ if (isset($_GET['proses'])) {
 
     <?= content_open('Data Pengaduan Ditolak') ?>
     <hr>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped" id="example">
         <thead>
             <tr>
                 <th>No</th>

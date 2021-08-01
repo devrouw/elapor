@@ -115,7 +115,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     <?= content_open('Data Perbaikan') ?>
     
     <hr>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped" id="example">
         <thead>
             <tr>
                 <th>No</th>
