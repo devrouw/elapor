@@ -33,17 +33,17 @@
         </li>
         <li>
         <a href="<?=url('data_masyarakat')?>">
-        <i class="fa fa-circle-o"></i> <span>Data Masyarakat</span>
+        <i class="fa fa-users"></i> <span>Data Masyarakat</span>
         </a>
         </li>
         <li>
         <a href="<?=url('data_pengaduan')?>">
-        <i class="fa fa-circle-o"></i> <span>Data Pengaduan</span>
+        <i class="fa fa-exclamation-circle"></i> <span>Data Pengaduan</span>
         </a>
         </li>
         <li>
         <a href="<?=url('data_perbaikan')?>">
-        <i class="fa fa-circle-o"></i> <span>Data Perkembangan Perbaikan</span>
+        <i class="fa fa-check-circle"></i> <span>Data Perkembangan Perbaikan</span>
         </a>
         </li>
         <li>
