@@ -5,7 +5,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?=templates()?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="<?=templates()?>dist/img/logo_dlh.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Hello</p>

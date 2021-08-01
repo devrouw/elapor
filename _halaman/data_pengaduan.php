@@ -192,7 +192,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     <?= content_close() ?>
 <?php } else { ?>
 
-    <?= content_open('Data Pengaduan') ?>
+    <?= content_open('Data Pengaduan Masuk') ?>
     <hr>
     <table class="table table-bordered">
         <thead>
@@ -237,7 +237,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     </table>
     <?= content_close() ?>
 
-    <?= content_open('Data Pengaduan') ?>
+    <?= content_open('Data Pengaduan Ditolak') ?>
     <hr>
     <table class="table table-bordered">
         <thead>
