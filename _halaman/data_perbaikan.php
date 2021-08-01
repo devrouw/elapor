@@ -55,10 +55,10 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     $kategori = "";
 
     if (isset($_GET['ubah']) and isset($_GET['id'])) {
-        $db->where('id', $_GET['id']);
+        $db->where('id_pengaduan', $_GET['id']);
         $row = $db->ObjectBuilder()->getOne('tb_pengaduan');
         if ($db->count > 0) {
-            $id = $row->id;
+            $id = $row->id_pengaduan;
             $foto_aduan = $row->foto_aduan;
             $no_telpon = $row->no_telpon;
             $lng = $row->lng;
@@ -70,7 +70,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
 
     <?= content_open('Form Data Perbaikan') ?>
     <form method="post" enctype="multipart/form-data">
-        <?= input_hidden('id', $id) ?>
+        <?= input_hidden('id_pengaduan', $id) ?>
         <div class="form-group" class="">
             <label>Username</label>
             <div class="row">
