@@ -15,7 +15,7 @@ if($type_query === "show"){
      else {
          $response["code"] = 404;
          $response["status"] = "error";
-         $response["data"] = "";
+         $response["data"] = null;
          $response["message"] = "show error";
 
          echo json_encode($response);
@@ -55,7 +55,7 @@ else if ($type_query === "input"){
         {
             $response["code"] = 404;
             $response["status"] = "404";
-            $response["data"] = "";
+            $response["data"] = null;
             $response["message"] = "input error $message";
             
             echo json_encode($response);
