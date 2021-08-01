@@ -27,12 +27,13 @@ if (isset($_POST['simpan'])) {
         $data['foto_perbaikan'] = $_POST['foto_perbaikan'];
         $data['keterangan'] = $_POST['keterangan'];
         $data['status_perbaikan'] = "2";
-        $db->where('id', $_POST['id']);
-        $db->update("tb_perbaikan", $data);
+        $data['id_pengaduan'] = $_POST['id'];
+        // $db->where('id', $_POST['id']);
+        $db->insert("tb_perbaikan", $data);
     ?>
         <script type="text/javascript">
             window.alert('Berhasil Dikirim');
-            window.location.href = "<?= url('warga') ?>";
+            window.location.href = "<?= url('data_perbaikan') ?>";
         </script>
     <?php }
 }
@@ -46,7 +47,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     $keterangan = "";
 
     if (isset($_GET['ubah']) and isset($_GET['id'])) {
-        $db->join('tb_perbaikan b','a.id_perbaikan=b.id','LEFT');
+        $db->join('tb_perbaikan b','a.id_pengaduan=b.id_pengaduan','LEFT');
         $db->join('tb_masyarakat c','a.nik=c.nik','LEFT');
         $db->where('a.id_pengaduan', $_GET['id']);
         $row = $db->ObjectBuilder()->getOne('tb_pengaduan a');
@@ -184,7 +185,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
         <tbody>
             <?php
             $no = 1;
-            $db->join('tb_perbaikan b','a.id_perbaikan=b.id','LEFT');
+            $db->join('tb_perbaikan b','a.id_pengaduan=b.id_pengaduan','LEFT');
             $db->join('tb_masyarakat c','a.nik=c.nik','LEFT');
             $db->where('b.status_perbaikan', '2');
             $get = $db->ObjectBuilder()->get('tb_pengaduan a');
