@@ -32,7 +32,7 @@ $setTemplate = true;
                 <i class="fa fa-ban" style="font-size: 60px;"></i>
               <p>Belum ditangani</p>
             </div>
-            <a href="#" class="small-box-footer">Selengkapnya<i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?=url('data_pengaduan')?>" class="small-box-footer">Selengkapnya<i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -43,7 +43,7 @@ $setTemplate = true;
                 <i class="fa fa-check-circle" style="font-size: 60px;"></i>
               <p>Sudah ditangani</p>
             </div>
-            <a href="#" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?=url('data_perbaikan')?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <div class="col-md-1"></div>
