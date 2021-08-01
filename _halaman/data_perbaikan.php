@@ -15,7 +15,7 @@ if (isset($_POST['simpan'])) {
         // $data['foto_pengaduan'] = $_POST['foto_pengaduan'];
         $data['foto_perbaikan'] = $_POST['foto_perbaikan'];
         $data['keterangan'] = $_POST['keterangan'];
-        $data['status_perbaikan'] = "1";
+        $data['status_perbaikan'] = "2";
         $db->insert("tb_perbaikan", $data);
 ?>
         <script type="text/javascript">
@@ -26,6 +26,7 @@ if (isset($_POST['simpan'])) {
     } else {
         $data['foto_perbaikan'] = $_POST['foto_perbaikan'];
         $data['keterangan'] = $_POST['keterangan'];
+        $data['status_perbaikan'] = "2";
         $db->where('id', $_POST['id']);
         $db->update("tb_perbaikan", $data);
     ?>
@@ -156,6 +157,47 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
                     <td>
                         <a href="<?= url($url . '&ubah&id=' . $row->id_pengaduan) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Update</a>
                     </td>
+                </tr>
+            <?php
+                $no++;
+            }
+            ?>
+        </tbody>
+    </table>
+    <?= content_close() ?>
+
+    <?= content_open('Data Perbaikan Selesai') ?>
+    
+    <hr>
+    <table class="table table-bordered table-striped" id="example">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Pelapor</th>
+                <th>Kategori</th>
+                <th>Foto Pengaduan</th>
+                <th>Foto Perkembangan</th>
+                <th>Keterangan</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $no = 1;
+            $db->join('tb_perbaikan b','a.id_perbaikan=b.id','LEFT');
+            $db->join('tb_masyarakat c','a.nik=c.nik','LEFT');
+            $db->where('a.status', '2');
+            $get = $db->ObjectBuilder()->get('tb_pengaduan a');
+            foreach ($get as $row) { ?>
+                <tr>
+                    <td><?= $no ?></td>
+                    <td><?= $row->nama_lengkap ?></td>
+                    <td><?= $row->kategori ?></td>
+                    <td><div class="zoom"><img src="<?=assets('unggah/'.$row->foto_aduan)?>" style="width:50px;height:50px;"></div></td>
+                    <td><div class="zoom"><img src="<?=assets('unggah/'.$row->foto_perbaikan)?>" style="width:50px;height:50px;"></div></td>
+                    <td><?= $row->keterangan ?></td>
+                    <td>Selesai</td>
+                    
                 </tr>
             <?php
                 $no++;
