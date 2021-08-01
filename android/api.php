@@ -76,8 +76,8 @@ case "daftar":
     {
         $response["code"] = 404;
         $response["status"] = "error";
-        $response["data"] = null;
-        $response["message"] = "Gagal Mendaftar";
+        $response["data"] = "data gagal diinput";
+        $response["message"] = "NIK sudah terdaftar";
         
         echo json_encode($response);
 
@@ -100,6 +100,7 @@ case "edit_biodata":
     $jenis_kelamin = $_POST['jenis_kelamin'];
     $alamat = $_POST['alamat'];
     $email = $_POST['email'];
+    $password = $_POST['password'];
     $no_telepon = $_POST['no_telepon'];
     $kode_pos = $_POST['kode_pos'];
     $kabupaten = $_POST['kabupaten'];
@@ -116,6 +117,7 @@ case "edit_biodata":
         jenis_kelamin = '$jenis_kelamin',
         alamat = '$alamat',
         email = '$email',
+        password = '$password',
         no_telpon = '$no_telepon',
         kode_pos = '$kode_pos',
         kabupaten = '$kabupaten',
@@ -131,6 +133,7 @@ case "edit_biodata":
         jenis_kelamin = '$jenis_kelamin',
         alamat = '$alamat',
         email = '$email',
+        password = '$password',
         no_telpon = '$no_telepon',
         kode_pos = '$kode_pos',
         kabupaten = '$kabupaten',
@@ -150,20 +153,20 @@ case "edit_biodata":
         $response["code"] = 200;
         $response["status"] = "OK";
         $response["data"] = "data berhasil diinput.";
-        $response["message"] = $message;
+        $response["message"] = "Data berhasil diinput";
         echo json_encode($response);
     }else
     {
         $response["code"] = 404;
         $response["status"] = "error";
-        $response["data"] = null;
-        $response["message"] = "input error $message";
+        $response["data"] = "data gagal diinput.";
+        $response["message"] = "input error";
         
         echo json_encode($response);
 
     }
 
-    $message = 'Data Berhasil Diubah!';
+    // $message = 'Data Berhasil Diubah!';
     
     // include './res.php';
 die();
