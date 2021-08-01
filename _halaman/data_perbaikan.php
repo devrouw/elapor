@@ -137,7 +137,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
         <tbody>
             <?php
             $no = 1;
-            $db->join('tb_perbaikan b','a.id_perbaikan=b.id','LEFT');
+            $db->join('tb_perbaikan b','a.id_pengaduan=b.id_pengaduan','LEFT');
             $db->join('tb_masyarakat c','a.nik=c.nik','LEFT');
             $db->where('a.status', '1');
             $get = $db->ObjectBuilder()->get('tb_pengaduan a');
