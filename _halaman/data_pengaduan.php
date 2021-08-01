@@ -236,5 +236,42 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             ?>
         </tbody>
     </table>
+    <hr>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Pelapor</th>
+                <th>Kategori</th>
+                <th>Foto Aduan</th>
+                <th>Keterangan</th>
+                <th>No Telp</th>
+                <th>Lokasi GPS</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $no = 1;
+            $db->join('tb_masyarakat b','a.nik=b.nik','LEFT');
+            $db->where('a.status', '2');
+            $get = $db->ObjectBuilder()->get('tb_pengaduan a');
+            foreach ($get as $row) { ?>
+                <tr>
+                    <td><?= $no ?></td>
+                    <td><?= $row->nama_lengkap ?></td>
+                    <td><?= $row->kategori ?></td>
+                    <td><div class="zoom"><img src="<?=assets('unggah/'.$row->foto_aduan)?>" style="width:50px;height:50px;"></div></td>
+                    <td><?= $row->pesan ?></td>
+                    <td><?= $row->no_telpon ?></td>
+                    <td><a href="http://maps.google.com/maps?q=<?= $row->lat ?>,<?= $row->lng ?>" target="_BLANK"><?= $row->lat ?>,<?= $row->lng ?></a></td>
+                    <td>Ditolak</td>
+                </tr>
+            <?php
+                $no++;
+            }
+            ?>
+        </tbody>
+    </table>
     <?= content_close() ?>
 <?php } ?>
