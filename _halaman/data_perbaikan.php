@@ -77,10 +77,10 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
         <div class="form-group">
             <label>Foto Pengaduan</label>
             <div class="row">
-            <div class="col-md-6">
-            <img src="<?=assets('unggah/'.$row->foto_aduan)?>" style="width:80px;height:80px;">
+            <div class="col-md-3">
+            <a href="<?=assets('unggah/'.$row->foto_aduan)?>" target="_blank" rel="noopener noreferrer"><img src="<?=assets('unggah/'.$row->foto_aduan)?>" style="width:240px;height:150px;"></a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
             <?= input_file('foto_aduan', $foto_aduan) ?>
             </div>
             </div>
@@ -88,8 +88,11 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
         <div class="form-group">
             <label>Foto Perkembangan</label>
             <div class="row">
-            <div class="col-md-6">
-            <?= input_text('foto_perbaikan', $foto_perbaikan) ?>
+            <div class="col-md-3">
+            <a href="<?=assets('unggah/'.$row->foto_perbaikan)?>" target="_blank" rel="noopener noreferrer"><img src="<?=assets('unggah/'.$row->foto_perbaikan)?>" style="width:240px;height:150px;"></a>
+            </div>
+            <div class="col-md-3">
+            <?= input_file('foto_aduan', $foto_perbaikan) ?>
             </div>
             </div>
         </div>
