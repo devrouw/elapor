@@ -5,12 +5,17 @@ $url = 'data_perbaikan';
 $setTemplate = true;
 
 if (isset($_POST['simpan'])) {
+    $file=upload('foto_perbaikan','');
+    if($file!=false){
+        $data['foto_perbaikan']=$file;
+    }
     if ($_POST['id'] == "") {
         // $data['nama_lengkap'] = $_POST['nama_lengkap'];
         // $data['kategori'] = $_POST['kategori'];
         // $data['foto_pengaduan'] = $_POST['foto_pengaduan'];
         $data['foto_perbaikan'] = $_POST['foto_perbaikan'];
         $data['keterangan'] = $_POST['keterangan'];
+        $data['status_perbaikan'] = "1";
         $db->insert("tb_perbaikan", $data);
 ?>
         <script type="text/javascript">
