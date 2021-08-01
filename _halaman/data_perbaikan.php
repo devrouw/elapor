@@ -158,7 +158,11 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
                     <td><div class="zoom"><img src="<?=assets('unggah/'.$row->foto_aduan)?>" style="width:50px;height:50px;"></div></td>
                     <td><div class="zoom"><img src="<?=assets('unggah/'.$row->foto_perbaikan)?>" style="width:50px;height:50px;"></div></td>
                     <td><?= $row->keterangan ?></td>
-                    <td><?= $row->status_perbaikan ?></td>
+                    <td><?php if($row->status_perbaikan == "1"){
+                        echo "Sedang Proses";
+                    }else{
+                        echo "Selesai";
+                    } ?></td>
                     <td>
                         <a href="<?= url($url . '&ubah&id=' . $row->id) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Ubah</a>
                     </td>
