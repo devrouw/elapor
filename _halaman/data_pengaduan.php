@@ -4,49 +4,9 @@ $judul = $title;
 $url = 'data_pengaduan';
 $setTemplate = true;
 
-if (isset($_POST['simpan'])) {
-    $file=upload('foto_bangunan','bangunan');
-    if($file!=false){
-        $data['foto_bangunan']=$file;
-    }
-    if ($_POST['id_bangunan'] == "") {
-        $data['jenis_bangunan'] = $_POST['jenis_bangunan'];
-        $data['alamat'] = $_POST['alamat'];
-        $data['lng'] = $_POST['lng'];
-        $data['lat'] = $_POST['lat'];
-        $data['nomor_rumah'] = $_POST['nomor_rumah'];
-        $data['luas_tanah'] = $_POST['luas_tanah'];
-        $data['luas_bangunan'] = $_POST['luas_bangunan'];
-        $data['id_warga'] = $_POST['id_warga'];
-        $db->insert("tb_bangunan", $data);
-?>
-        <script type="text/javascript">
-            window.alert('Berhasil Disimpan');
-            window.location.href = "<?= url('bangunan') ?>";
-        </script>
-    <?php
-    } else {
-        $data['jenis_bangunan'] = $_POST['jenis_bangunan'];
-        $data['alamat'] = $_POST['alamat'];
-        $data['lng'] = $_POST['lng'];
-        $data['lat'] = $_POST['lat'];
-        $data['nomor_rumah'] = $_POST['nomor_rumah'];
-        $data['luas_tanah'] = $_POST['luas_tanah'];
-        $data['luas_bangunan'] = $_POST['luas_bangunan'];
-        $data['id_warga'] = $_POST['id_warga'];
-        $db->where('id_bangunan', $_POST['id_bangunan']);
-        $db->update("tb_bangunan", $data);
-    ?>
-        <script type="text/javascript">
-            window.alert('Berhasil Diubah');
-            window.location.href = "<?= url('bangunan') ?>";
-        </script>
-    <?php }
-}
-
 if (isset($_GET['tolak'])) {
     $data['status'] = '2';
-    $db->where('id', $_GET['id']);
+    $db->where('id_pengaduan', $_GET['id']);
     $db->update("tb_pengaduan", $data); ?>
     <script type="text/javascript">
         window.alert('Data Aduan Ditolak');
@@ -56,141 +16,14 @@ if (isset($_GET['tolak'])) {
 
 if (isset($_GET['proses'])) {
     $data['status'] = '1';
-    $db->where('id', $_GET['id']);
+    $db->where('id_pengaduan', $_GET['id']);
     $db->update("tb_pengaduan", $data);?>
     <script type="text/javascript">
         document.getElementById('tes').style.display = 'none';
         window.alert('Data Aduan Berhasil Diproses');
         window.location.href = "<?= url('data_pengaduan') ?>";
     </script>
-<?php }
-
-if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
-    $id_bangunan = "";
-    $foto_bangunan = "";
-    $jenis_bangunan = "";
-    $alamat = "";
-    $lng = "";
-    $lat = "";
-    $nomor_rumah = "";
-    $luas_tanah = "";
-    $luas_bangunan = "";
-    $id_warga = "";
-
-    if (isset($_GET['ubah']) and isset($_GET['id'])) {
-        $db->where('id_bangunan', $_GET['id']);
-        $row = $db->ObjectBuilder()->getOne('tb_bangunan');
-        if ($db->count > 0) {
-            $id_bangunan = $row->id_bangunan;
-            $foto_bangunan = $row->foto_bangunan;
-            $jenis_bangunan = $row->jenis_bangunan;
-            $alamat = $row->alamat;
-            $lng = $row->lng;
-            $lat = $row->lat;
-            $nomor_rumah = $row->nomor_rumah;
-            $luas_tanah = $row->luas_tanah;
-            $luas_bangunan = $row->luas_bangunan;
-            $id_warga = $row->id_warga;
-        }
-    }
-?>
-
-    <?= content_open('Form Data Pengaduan') ?>
-    <form method="post" enctype="multipart/form-data">
-        <?= input_hidden('id_bangunan', $id_bangunan) ?>
-        <div class="row">
-        <div class="col-md-6">
-        
-        <div class="form-group" class="">
-            <label>Foto Bangunan</label>
-            <div class="row">
-            <div class="col-md-10">
-            <?= input_file('foto_bangunan', $foto_bangunan) ?>
-            </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Jenis Bangunan</label>
-            <div class="row">
-            <div class="col-md-10">
-            <?= input_text('jenis_bangunan', $jenis_bangunan) ?>
-            </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Alamat</label>
-            <div class="row">
-            <div class="col-md-10">
-            <?= input_text('alamat', $alamat) ?>
-            </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-            <div class="col-md-5">
-            <label>Longitude</label>
-            <?= input_text('lng', $lng) ?>
-            </div>
-            <div class="col-md-5">
-            <label>Latitude</label>
-            <?= input_text('lat', $lat) ?>
-            </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Nomor Rumah</label>
-            <div class="row">
-            <div class="col-md-10">
-            <?= input_text('nomor_rumah', $nomor_rumah) ?>
-            </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Luas Tanah</label>
-            <div class="row">
-            <div class="col-md-10">
-            <?= input_text('luas_tanah', $luas_tanah) ?>
-            </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Luas Bangunan</label>
-            <div class="row">
-            <div class="col-md-10">
-            <?= input_text('luas_bangunan', $luas_bangunan) ?>
-            </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Akun Warga</label>
-            <div class="row">
-            <div class="col-md-10">
-            <?php
-	    		$op['']='Pilih Akun Warga';
-	    		foreach ($db->ObjectBuilder()->get('tb_warga') as $row) {
-	    			$op[$row->id_warga]=$row->username;
-	    		}
-	    	?>
-	    		<?=select('id_warga',$op,$id_warga)?>
-            </div>
-            </div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <h3>Pilih Titik</h3>
-        <div id="mapid" style="height:400px"></div>
-        </div>
-        <div class="col-md-12">
-        <hr>
-        <div class="form-group">
-            <button type="submit" name="simpan" class="btn btn-info"> <i class="fa fa-save"></i>Simpan</button>
-            <a href="<?= url($url) ?>" class="btn btn-danger"> <i class="fa fa-reply"></i>Kembali</a>
-        </div>
-        </div>
-        </div>
-    </form>
-    <?= content_close() ?>
-<?php } else { ?>
+<?php } ?>
 
     <?= content_open('Data Pengaduan Masuk') ?>
     <hr>
@@ -225,8 +58,8 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
                     <td><a href="http://maps.google.com/maps?q=<?= $row->lat ?>,<?= $row->lng ?>" target="_BLANK"><?= $row->lat ?>,<?= $row->lng ?></a></td>
                     <td>Belum ditangani</td>
                     <td>
-                        <a href="<?= url($url . '&proses&id=' . $row->id) ?>" class="btn btn-success" onclick="return confirm('Proses Data?')"> <i class="fa fa-edit"></i>Proses</a>
-                        <a href="<?= url($url . '&tolak&id=' . $row->id) ?>" class="btn btn-danger" onclick="return confirm('Tolak Data?')"> <i class="fa fa-trash"></i>Tolak</a>
+                        <a href="<?= url($url . '&proses&id=' . $row->id_pengaduan) ?>" class="btn btn-success" onclick="return confirm('Proses Data?')"> <i class="fa fa-edit"></i>Proses</a>
+                        <a href="<?= url($url . '&tolak&id=' . $row->id_pengaduan) ?>" class="btn btn-danger" onclick="return confirm('Tolak Data?')"> <i class="fa fa-trash"></i>Tolak</a>
                     </td>
                 </tr>
             <?php
@@ -276,6 +109,3 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
         </tbody>
     </table>
     <?= content_close() ?>
-
-
-<?php } ?>

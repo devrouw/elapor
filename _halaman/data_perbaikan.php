@@ -164,7 +164,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
                         echo "Selesai";
                     } ?></td>
                     <td>
-                        <a href="<?= url($url . '&ubah&id=' . $row->id) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Ubah</a>
+                        <a href="<?= url($url . '&ubah&id=' . $row->id_pengaduan) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Ubah</a>
                     </td>
                 </tr>
             <?php

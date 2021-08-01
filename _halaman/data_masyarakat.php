@@ -130,7 +130,7 @@ document.querySelector('select[name=category]').addEventListener('change', funct
             </div>
             <div class="col-md-5">
             <label>Tanggal Lahir</label>
-            <?= input_text('tgl_lahir', $tgl_lahir) ?>
+            <?= input_date('tgl_lahir', $tgl_lahir) ?>
             </div>
             </div>
         </div>
