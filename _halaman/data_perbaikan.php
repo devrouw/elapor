@@ -13,9 +13,10 @@ if (isset($_POST['simpan'])) {
         // $data['nama_lengkap'] = $_POST['nama_lengkap'];
         // $data['kategori'] = $_POST['kategori'];
         // $data['foto_pengaduan'] = $_POST['foto_pengaduan'];
-        $data['foto_perbaikan'] = $_POST['foto_perbaikan'];
+        // $data['foto_perbaikan'] = $_POST['foto_perbaikan'];
         $data['keterangan'] = $_POST['keterangan'];
         $data['status_perbaikan'] = "2";
+        $data['id_aduan'] = $_POST['id'];
         $db->insert("tb_perbaikan", $data);
 ?>
         <script type="text/javascript">
@@ -24,7 +25,7 @@ if (isset($_POST['simpan'])) {
         </script>
     <?php
     } else {
-        $data['foto_perbaikan'] = $_POST['foto_perbaikan'];
+        // $data['foto_perbaikan'] = $_POST['foto_perbaikan'];
         $data['keterangan'] = $_POST['keterangan'];
         $data['status_perbaikan'] = "2";
         $data['id_aduan'] = $_POST['id'];
