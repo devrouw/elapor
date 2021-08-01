@@ -186,7 +186,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             $no = 1;
             $db->join('tb_perbaikan b','a.id_perbaikan=b.id','LEFT');
             $db->join('tb_masyarakat c','a.nik=c.nik','LEFT');
-            $db->where('a.status', '2');
+            $db->where('b.status_perbaikan', '2');
             $get = $db->ObjectBuilder()->get('tb_pengaduan a');
             foreach ($get as $row) { ?>
                 <tr>
