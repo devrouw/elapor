@@ -193,7 +193,6 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
 <?php } else { ?>
 
     <?= content_open('Data Pengaduan') ?>
-    <!-- <a href="<?= url($url . '&tambah') ?>" class="btn btn-success"><i class="fa fa-plus"></i>Tambah</a> -->
     <hr>
     <table class="table table-bordered">
         <thead>
@@ -236,6 +235,9 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             ?>
         </tbody>
     </table>
+    <?= content_close() ?>
+
+    <?= content_open('Data Pengaduan') ?>
     <hr>
     <table class="table table-bordered">
         <thead>
@@ -274,4 +276,6 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
         </tbody>
     </table>
     <?= content_close() ?>
+
+
 <?php } ?>
