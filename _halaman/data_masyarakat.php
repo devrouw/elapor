@@ -229,7 +229,6 @@ document.querySelector('select[name=category]').addEventListener('change', funct
 <?php } else { ?>
 
     <?= content_open('Data Masyarakat') ?>
-    <a href="<?= url($url . '&tambah') ?>" class="btn btn-success"><i class="fa fa-plus"></i>Tambah</a>
     <hr>
     <table class="table table-bordered">
         <thead>
