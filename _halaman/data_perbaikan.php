@@ -5,65 +5,50 @@ $url = 'data_perbaikan';
 $setTemplate = true;
 
 if (isset($_POST['simpan'])) {
-    if ($_POST['id_warga'] == "") {
-        $data['username'] = $_POST['username'];
-        $data['password'] = $_POST['password'];
-        $data['nama_lengkap'] = $_POST['nama_lengkap'];
-        $data['alamat'] = $_POST['alamat'];
-        $data['no_telp'] = $_POST['no_telp'];
-        $data['no_rumah'] = $_POST['no_rumah'];
-        $db->insert("tb_warga", $data);
+    if ($_POST['id'] == "") {
+        // $data['nama_lengkap'] = $_POST['nama_lengkap'];
+        // $data['kategori'] = $_POST['kategori'];
+        // $data['foto_pengaduan'] = $_POST['foto_pengaduan'];
+        $data['foto_perbaikan'] = $_POST['foto_perbaikan'];
+        $data['keterangan'] = $_POST['keterangan'];
+        $db->insert("tb_perbaikan", $data);
 ?>
         <script type="text/javascript">
-            window.alert('Berhasil Disimpan');
-            window.location.href = "<?= url('warga') ?>";
+            window.alert('Berhasil Dikirim');
+            window.location.href = "<?= url('data_perbaikan') ?>";
         </script>
     <?php
     } else {
-        $data['username'] = $_POST['username'];
-        $data['password'] = $_POST['password'];
-        $data['nama_lengkap'] = $_POST['nama_lengkap'];
-        $data['alamat'] = $_POST['alamat'];
-        $data['no_telp'] = $_POST['no_telp'];
-        $data['no_rumah'] = $_POST['no_rumah'];
-        $db->where('id_warga', $_POST['id_warga']);
-        $db->update("tb_warga", $data);
+        $data['foto_perbaikan'] = $_POST['foto_perbaikan'];
+        $data['keterangan'] = $_POST['keterangan'];
+        $db->where('id', $_POST['id']);
+        $db->update("tb_perbaikan", $data);
     ?>
         <script type="text/javascript">
-            window.alert('Berhasil Diubah');
+            window.alert('Berhasil Dikirim');
             window.location.href = "<?= url('warga') ?>";
         </script>
     <?php }
 }
 
-if (isset($_GET['hapus'])) {
-    $db->where('id_warga', $_GET['id']);
-    $db->delete("tb_warga"); ?>
-    <script type="text/javascript">
-        window.alert('Berhasil Dihapus');
-        window.location.href = "<?= url('warga') ?>";
-    </script>
-<?php }
-
 if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     $id = "";
-    $foto_aduan = "";
-    $pesan = "";
-    $no_telpon = "";
-    $lng = "";
-    $lat = "";
+    $nama_lengkap = "";
     $kategori = "";
+    $foto_aduan= "";
+    $foto_perbaikan = "";
+    $keterangan = "";
 
     if (isset($_GET['ubah']) and isset($_GET['id'])) {
         $db->where('id_pengaduan', $_GET['id']);
         $row = $db->ObjectBuilder()->getOne('tb_pengaduan');
         if ($db->count > 0) {
             $id = $row->id_pengaduan;
+            $nama_lengkap = $row->nama_lengkap;
             $foto_aduan = $row->foto_aduan;
-            $no_telpon = $row->no_telpon;
-            $lng = $row->lng;
-            $lat = $row->lat;
             $kategori = $row->kategori;
+            $foto_perbaikan = $row->foto_perbaikan;
+            $keterangan = $row->keterangan;
         }
     }
 ?>
@@ -72,23 +57,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     <form method="post" enctype="multipart/form-data">
         <?= input_hidden('id_pengaduan', $id) ?>
         <div class="form-group" class="">
-            <label>Username</label>
-            <div class="row">
-            <div class="col-md-6">
-            <?= input_text('username', $username) ?>
-            </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <div class="row">
-            <div class="col-md-6">
-            <?= input_text('password', $password) ?>
-            </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Nama Lengkap</label>
+            <label>Nama Pelapor</label>
             <div class="row">
             <div class="col-md-6">
             <?= input_text('nama_lengkap', $nama_lengkap) ?>
@@ -96,7 +65,23 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             </div>
         </div>
         <div class="form-group">
-            <label>Alamat</label>
+            <label>Kategori</label>
+            <div class="row">
+            <div class="col-md-6">
+            <?= input_text('kategori', $kategori) ?>
+            </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Foto Pengaduan</label>
+            <div class="row">
+            <div class="col-md-6">
+            <?= input_text('nama_lengkap', $nama_lengkap) ?>
+            </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Foto Perkembangan</label>
             <div class="row">
             <div class="col-md-6">
             <?= input_text('alamat', $alamat) ?>
@@ -104,18 +89,10 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             </div>
         </div>
         <div class="form-group">
-            <label>No.Telp</label>
+            <label>Keterangan</label>
             <div class="row">
             <div class="col-md-6">
-            <?= input_text('no_telp', $no_telp) ?>
-            </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>No.Rumah</label>
-            <div class="row">
-            <div class="col-md-6">
-            <?= input_text('no_rumah', $no_rumah) ?>
+            <?= textarea('keterangan', $keterangan) ?>
             </div>
             </div>
         </div>
@@ -127,7 +104,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     <?= content_close() ?>
 <?php } else { ?>
 
-    <?= content_open('Data Warga') ?>
+    <?= content_open('Data Perbaikan') ?>
     
     <hr>
     <table class="table table-bordered">
