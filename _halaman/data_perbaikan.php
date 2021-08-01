@@ -40,8 +40,10 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     $keterangan = "";
 
     if (isset($_GET['ubah']) and isset($_GET['id'])) {
-        $db->where('id_pengaduan', $_GET['id']);
-        $row = $db->ObjectBuilder()->getOne('tb_pengaduan');
+        $db->join('tb_perbaikan b','a.id_perbaikan=b.id','LEFT');
+        $db->join('tb_masyarakat c','a.nik=c.nik','LEFT');
+        $db->where('a.id_pengaduan', $_GET['id']);
+        $row = $db->ObjectBuilder()->getOne('tb_pengaduan a');
         if ($db->count > 0) {
             $id = $row->id_pengaduan;
             $nama_lengkap = $row->nama_lengkap;
@@ -76,7 +78,10 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             <label>Foto Pengaduan</label>
             <div class="row">
             <div class="col-md-6">
-            <?= input_text('nama_lengkap', $nama_lengkap) ?>
+            <img src="<?=assets('unggah/'.$row->foto_pengaduan)?>" style="width:80px;height:80px;">
+            </div>
+            <div class="col-md-4">
+            <?= input_file('foto_pengaduan', $foto_pengaduan) ?>
             </div>
             </div>
         </div>
@@ -84,7 +89,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             <label>Foto Perkembangan</label>
             <div class="row">
             <div class="col-md-6">
-            <?= input_text('alamat', $alamat) ?>
+            <?= input_text('foto_perbaikan', $foto_perbaikan) ?>
             </div>
             </div>
         </div>
