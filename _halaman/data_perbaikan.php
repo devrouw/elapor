@@ -78,10 +78,10 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             <label>Foto Pengaduan</label>
             <div class="row">
             <div class="col-md-6">
-            <img src="<?=assets('unggah/'.$row->foto_pengaduan)?>" style="width:80px;height:80px;">
+            <img src="<?=assets('unggah/'.$row->foto_aduan)?>" style="width:80px;height:80px;">
             </div>
             <div class="col-md-4">
-            <?= input_file('foto_pengaduan', $foto_pengaduan) ?>
+            <?= input_file('foto_aduan', $foto_aduan) ?>
             </div>
             </div>
         </div>
