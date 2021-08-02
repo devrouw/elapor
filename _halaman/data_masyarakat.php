@@ -265,7 +265,6 @@ document.querySelector('select[name=category]').addEventListener('change', funct
                     <td><?= $row->kabupaten ?></td>
                     <td><?= $row->kecamatan ?></td>
                     <td>
-                        <a href="<?= url($url . '&ubah&nik=' . $row->nik) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Ubah</a>
                         <a href="<?= url($url . '&hapus&nik=' . $row->nik) ?>" class="btn btn-danger" onclick="return confirm('Hapus Data?')"> <i class="fa fa-trash"></i>Hapus</a>
                     </td>
                 </tr>
