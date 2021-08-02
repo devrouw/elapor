@@ -251,14 +251,16 @@ break;
 case "detail_perbaikan":
     $type_query = "show";
     $nik = $_POST['nik'];
-    $id = $_POST['id'];
+    // $id = $_POST['id'];
     $id_aduan = $_POST['id_aduan'];
+    
+    $query = "SELECT * FROM tb_pengaduan LEFT JOIN tb_perbaikan ON tb_pengaduan.id_pengaduan=tb_perbaikan.id_aduan JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id JOIN tb_masyarakat ON tb_pengaduan.nik=tb_masyarakat.nik WHERE tb_pengaduan.id_pengaduan='$id_aduan'";
 
-    if($id == "0"){
-        $query = "SELECT * FROM tb_pengaduan LEFT JOIN tb_perbaikan ON tb_pengaduan.id_pengaduan=tb_perbaikan.id_aduan JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id JOIN tb_masyarakat ON tb_pengaduan.nik=tb_masyarakat.nik WHERE tb_pengaduan.id_pengaduan='$id_aduan'";
-    }else{
-        $query = "SELECT * FROM tb_perbaikan JOIN tb_pengaduan ON tb_perbaikan.id_aduan=tb_pengaduan.id_pengaduan JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id JOIN tb_masyarakat ON tb_pengaduan.nik=tb_masyarakat.nik WHERE tb_perbaikan.id_aduan='$id_aduan'";
-    }
+    // if($id == "0"){
+    //     $query = "SELECT * FROM tb_pengaduan LEFT JOIN tb_perbaikan ON tb_pengaduan.id_pengaduan=tb_perbaikan.id_aduan JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id JOIN tb_masyarakat ON tb_pengaduan.nik=tb_masyarakat.nik WHERE tb_pengaduan.id_pengaduan='$id_aduan'";
+    // }else{
+    //     $query = "SELECT * FROM tb_perbaikan JOIN tb_pengaduan ON tb_perbaikan.id_aduan=tb_pengaduan.id_pengaduan JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id JOIN tb_masyarakat ON tb_pengaduan.nik=tb_masyarakat.nik WHERE tb_perbaikan.id_aduan='$id_aduan'";
+    // }
 
     $message = 'Data Ada!';
     
