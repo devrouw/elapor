@@ -202,7 +202,7 @@ case "input_aduan":
     file_put_contents("../assets/unggah/".$nama_foto,$realImage);
 
     $query = "INSERT INTO tb_pengaduan(
-        foto_aduan,pesan,no_telpon,lng,lat,kategori,id_dinas,nik,status,id_perbaikan
+        foto_aduan,pesan,no_telpon,lng,lat,kategori,id_dinas,nik,status,id_perbaikan_fk
     ) VALUES(
         '$nama_foto','$pesan','$no_telpon','$lng','$lat','$kategori','1','$nik','0','0'
     )";
