@@ -65,7 +65,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
 
     <?= content_open('Form Data Perbaikan') ?>
     <form method="post" enctype="multipart/form-data">
-        <?= input_hidden('id_pengaduan', $id) ?>
+        <?= input_hidden('id', $id) ?>
         <div class="form-group" class="">
             <label>Nama Pelapor</label>
             <div class="row">
