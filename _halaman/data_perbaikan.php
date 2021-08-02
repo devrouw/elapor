@@ -28,9 +28,13 @@ if (isset($_POST['simpan'])) {
         // $data['foto_perbaikan'] = $_POST['foto_perbaikan'];
         $data['keterangan'] = $_POST['keterangan'];
         $data['status_perbaikan'] = "2";
+        $new_data['status'] = "3";
         $data['id_aduan'] = $_POST['id'];
         // $db->where('id', $_POST['id']);
         $db->insert("tb_perbaikan", $data);
+
+        $db->where('id_pengaduan', $_POST['id']);
+        $db->update("tb_pengaduan", $new_data);
     ?>
         <script type="text/javascript">
             window.alert('Berhasil Dikirim');
