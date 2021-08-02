@@ -93,7 +93,6 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             <a href="<?=assets('unggah/'.$row->foto_aduan)?>" target="_blank" rel="noopener noreferrer"><img src="<?=assets('unggah/'.$row->foto_aduan)?>" style="width:240px;height:150px;"></a>
             </div>
             <!-- <div class="col-md-3">
-            <?= input_file('foto_aduan', $foto_aduan) ?>
             </div> -->
             </div>
         </div>
@@ -104,7 +103,7 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
             <a href="<?=assets('unggah/'.$row->foto_perbaikan)?>" target="_blank" rel="noopener noreferrer"><img src="<?=assets('unggah/'.$row->foto_perbaikan)?>" style="width:240px;height:150px;"></a>
             </div>
             <div class="col-md-3">
-            <?= input_file('foto_perbaikan', $foto_perbaikan) ?>
+            <?= input_file('foto_perbaikan', $foto_perbaikan, 'readURL(this)') ?>
             </div>
             </div>
         </div>

@@ -194,9 +194,8 @@ document.querySelector('select[name=category]').addEventListener('change', funct
             <div class="col-md-6">
             <img src="<?=assets('unggah/'.$row->foto_profil)?>" style="width:80px;height:80px;">
             </div>
-            <div class="col-md-4">
-            <?= input_file('foto_profil', $foto_profil) ?>
-            </div>
+            <!-- <div class="col-md-4">
+            </div> -->
             </div>
         </div>
         <div class="form-group" class="">

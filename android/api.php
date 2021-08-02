@@ -1,212 +1,282 @@
 <?php
-$title = 'Data Perkembangan Perbaikan';
-$judul = $title;
-$url = 'data_perbaikan';
-$setTemplate = true;
+set_time_limit(0);
+date_default_timezone_set("Asia/Makassar");
+include_once './conn.php';
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+// mysqli_set_charset('utf8');
 
-if (isset($_POST['simpan'])) {
-    $file=upload('foto_perbaikan','');
-    if($file!=false){
-        $data['foto_perbaikan']=$file;
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if(json_decode(file_get_contents('php://input'), true)){
+        $_POST = json_decode(file_get_contents('php://input'), true);
+    };
+    $date=date("Ymd-h_i_s");
+    $case=$_POST['case'];
+    switch($case){
+
+#----------------------------------------------------------------------------------------------------------------------------------------
+case "daftar":
+    $type_query = "input";
+    $nik = $_POST['nik'];
+    $nama_lengkap = $_POST['nama_lengkap'];
+    $tempat_lahir = $_POST['tempat_lahir'];
+    $tanggal_lahir = $_POST['tanggal_lahir'];
+    $jenis_kelamin = $_POST['jenis_kelamin'];
+    $alamat = $_POST['alamat'];
+    $email = $_POST['email'];
+    $no_telepon = $_POST['no_telepon'];
+    $kode_pos = $_POST['kode_pos'];
+    $kabupaten = $_POST['kabupaten'];
+    $kecamatan = $_POST['kecamatan'];
+    $kelurahan = $_POST['kelurahan'];
+    $foto_profil = $_POST['foto_profil'];
+    $nama_foto = $_POST['nama_foto'];
+    $s = substr(str_shuffle(str_repeat("!@#$%^&*()0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 6)), 0, 6);
+    $realImage = base64_decode($foto_profil);
+
+    $query = "INSERT INTO tb_masyarakat(
+        nik,nama_lengkap,tempat_lahir,tgl_lahir,jenis_kelamin,alamat,email,password,no_telpon,kode_pos,kabupaten,kecamatan,kelurahan,foto_profil
+    ) VALUES(
+        '$nik','$nama_lengkap','$tempat_lahir','$tanggal_lahir','$jenis_kelamin','$alamat','$email','$s','$no_telepon','$kode_pos','$kabupaten','$kecamatan','$kelurahan','$nama_foto'
+    )";
+
+    $hasil = mysqli_multi_query($con,$query);
+    if($hasil){
+        file_put_contents("../assets/unggah/".$nama_foto,$realImage);
+        
+        $response["code"] = 200;
+        $response["status"] = "OK";
+        $response["data"] = "data berhasil diinput.";
+        $response["message"] = "Berhasil Mendaftar!";
+        $subject = 'Akun Anda Berhasil dibuat';
+        echo json_encode($response);
+
+        $message = "
+        <html>
+        <head>
+        <title>Akun Berhasil Dibuat</title>
+        </head>
+        <body>
+        <h3>Selamat! Akun Anda berhasil dibuat! Silakan login menggunakan informasi berikut:</h3>
+        <br>
+        <b>Email: <b> ".$email."
+        <br>
+        <b>Password: ".$s."</b>
+        </body>
+        </html>
+        ";
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= 'From: info@sha-dev.com'       . "\r\n" .
+                    'Reply-To: info@sha-dev.com' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
+
+        mail($email, $subject, $message, $headers);
+    }else
+    {
+        $response["code"] = 404;
+        $response["status"] = "error";
+        $response["data"] = "data gagal diinput";
+        $response["message"] = "NIK sudah terdaftar";
+        
+        echo json_encode($response);
+
     }
-    if ($_POST['id'] == "") {
-        // $data['nama_lengkap'] = $_POST['nama_lengkap'];
-        // $data['kategori'] = $_POST['kategori'];
-        // $data['foto_pengaduan'] = $_POST['foto_pengaduan'];
-        // $data['foto_perbaikan'] = $_POST['foto_perbaikan'];
-        $data['keterangan'] = $_POST['keterangan'];
-        $data['status_perbaikan'] = "2";
-        $data['id_aduan'] = $_POST['id'];
-        $db->insert("tb_perbaikan", $data);
-?>
-        <script type="text/javascript">
-            window.alert('Berhasil Dikirim');
-            window.location.href = "<?= url('data_perbaikan') ?>";
-        </script>
-    <?php
-    } else {
-        // $data['foto_perbaikan'] = $_POST['foto_perbaikan'];
-        $data['keterangan'] = $_POST['keterangan'];
-        $data['status_perbaikan'] = "2";
-        $data['id_aduan'] = $_POST['id'];
-        // $db->where('id', $_POST['id']);
-        $db->insert("tb_perbaikan", $data);
-    ?>
-        <script type="text/javascript">
-            window.alert('Berhasil Dikirim');
-            window.location.href = "<?= url('data_perbaikan') ?>";
-        </script>
-    <?php }
-}
 
-if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
-    $id = "";
-    $nama_lengkap = "";
-    $kategori = "";
-    $foto_aduan= "";
-    $foto_perbaikan = "";
-    $keterangan = "";
+    // $message = 'Data Berhasil Diinput!';
+    
+    // include './res.php';
+die();
+break;
 
-    if (isset($_GET['ubah']) and isset($_GET['id'])) {
-        $db->join('tb_perbaikan b','a.id_pengaduan=b.id_aduan','LEFT');
-        $db->join('tb_masyarakat c','a.nik=c.nik','LEFT');
-        $db->where('a.id_pengaduan', $_GET['id']);
-        $row = $db->ObjectBuilder()->getOne('tb_pengaduan a');
-        if ($db->count > 0) {
-            $id = $row->id_pengaduan;
-            $nama_lengkap = $row->nama_lengkap;
-            $foto_aduan = $row->foto_aduan;
-            $kategori = $row->kategori;
-            $foto_perbaikan = $row->foto_perbaikan;
-            $keterangan = $row->keterangan;
+
+#----------------------------------------------------------------------------------------------------------------------------------------
+case "edit_biodata":
+    $type_query = "update";
+    $nik = $_POST['nik'];
+    $nama_lengkap = $_POST['nama_lengkap'];
+    $tempat_lahir = $_POST['tempat_lahir'];
+    $tanggal_lahir = $_POST['tanggal_lahir'];
+    $jenis_kelamin = $_POST['jenis_kelamin'];
+    $alamat = $_POST['alamat'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $no_telepon = $_POST['no_telepon'];
+    $kode_pos = $_POST['kode_pos'];
+    $kabupaten = $_POST['kabupaten'];
+    $kecamatan = $_POST['kecamatan'];
+    $kelurahan = $_POST['kelurahan'];
+    $foto_profil = $_POST['foto_profil'];
+    $nama_foto = $_POST['nama_foto'];
+
+    if($nama_foto == ""){
+        $query = "UPDATE tb_masyarakat SET
+        nama_lengkap = '$nama_lengkap',
+        tempat_lahir = '$tempat_lahir',
+        tgl_lahir = '$tanggal_lahir',
+        jenis_kelamin = '$jenis_kelamin',
+        alamat = '$alamat',
+        email = '$email',
+        password = '$password',
+        no_telpon = '$no_telepon',
+        kode_pos = '$kode_pos',
+        kabupaten = '$kabupaten',
+        kecamatan = '$kecamatan',
+        kelurahan = '$kelurahan'
+        WHERE nik = '$nik'";
+    }else{
+        $realImage = base64_decode($foto_profil);
+        $query = "UPDATE tb_masyarakat SET
+        nama_lengkap = '$nama_lengkap',
+        tempat_lahir = '$tempat_lahir',
+        tgl_lahir = '$tanggal_lahir',
+        jenis_kelamin = '$jenis_kelamin',
+        alamat = '$alamat',
+        email = '$email',
+        password = '$password',
+        no_telpon = '$no_telepon',
+        kode_pos = '$kode_pos',
+        kabupaten = '$kabupaten',
+        kecamatan = '$kecamatan',
+        kelurahan = '$kelurahan',
+        foto_profil = '$nama_foto'
+        WHERE nik = '$nik'";
+    }
+    
+
+    $hasil = mysqli_multi_query($con,$query);
+    if($hasil){
+        if($nama_foto != ""){
+            file_put_contents("../assets/unggah/".$nama_foto,$realImage);
         }
+        
+        $response["code"] = 200;
+        $response["status"] = "OK";
+        $response["data"] = "data berhasil diinput.";
+        $response["message"] = "Data berhasil diinput";
+        echo json_encode($response);
+    }else
+    {
+        $response["code"] = 404;
+        $response["status"] = "error";
+        $response["data"] = "data gagal diinput.";
+        $response["message"] = "input error";
+        
+        echo json_encode($response);
+
     }
-?>
 
-    <?= content_open('Form Data Perbaikan') ?>
-    <form method="post" enctype="multipart/form-data">
-        <?= input_hidden('id', $id) ?>
-        <div class="form-group" class="">
-            <label>Nama Pelapor</label>
-            <div class="row">
-            <div class="col-md-6">
-            <?= input_text('nama_lengkap', $nama_lengkap) ?>
-            </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Kategori</label>
-            <div class="row">
-            <div class="col-md-6">
-            <?= input_text('kategori', $kategori) ?>
-            </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Foto Pengaduan</label>
-            <div class="row">
-            <div class="col-md-6">
-            <a href="<?=assets('unggah/'.$row->foto_aduan)?>" target="_blank" rel="noopener noreferrer"><img src="<?=assets('unggah/'.$row->foto_aduan)?>" style="width:240px;height:150px;"></a>
-            </div>
-            <!-- <div class="col-md-3">
-            <?= input_file('foto_aduan', $foto_aduan) ?>
-            </div> -->
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Foto Perkembangan</label>
-            <div class="row">
-            <div class="col-md-3">
-            <a href="<?=assets('unggah/'.$row->foto_perbaikan)?>" target="_blank" rel="noopener noreferrer"><img src="<?=assets('unggah/'.$row->foto_perbaikan)?>" style="width:240px;height:150px;"></a>
-            </div>
-            <div class="col-md-3">
-            <?= input_file('foto_perbaikan', $foto_perbaikan) ?>
-            </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Keterangan</label>
-            <div class="row">
-            <div class="col-md-6">
-            <?= textarea('keterangan', $keterangan) ?>
-            </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <button type="submit" name="simpan" class="btn btn-info"> <i class="fa fa-save"></i>Simpan</button>
-            <a href="<?= url($url) ?>" class="btn btn-danger"> <i class="fa fa-reply"></i>Kembali</a>
-        </div>
-    </form>
-    <?= content_close() ?>
-<?php } else { ?>
-
-    <?= content_open('Data Perbaikan') ?>
+    // $message = 'Data Berhasil Diubah!';
     
-    <hr>
-    <table class="table table-bordered table-striped" id="example">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama Pelapor</th>
-                <th>Kategori</th>
-                <th>Foto Pengaduan</th>
-                <th>Foto Perkembangan</th>
-                <th>Keterangan</th>
-                <th>Status</th>
-                <th>Opsi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $no = 1;
-            $db->join('tb_perbaikan b','a.id_pengaduan=b.id_aduan','LEFT');
-            $db->join('tb_masyarakat c','a.nik=c.nik','LEFT');
-            $db->where('a.status', '1');
-            $db->where('b.status_perbaikan', null);
-            $get = $db->ObjectBuilder()->get('tb_pengaduan a');
-            foreach ($get as $row) { ?>
-                <tr>
-                    <td><?= $no ?></td>
-                    <td><?= $row->nama_lengkap ?></td>
-                    <td><?= $row->kategori ?></td>
-                    <td><div class="zoom"><img src="<?=assets('unggah/'.$row->foto_aduan)?>" style="width:50px;height:50px;"></div></td>
-                    <td><div class="zoom"><img src="<?=assets('unggah/'.$row->foto_perbaikan)?>" style="width:50px;height:50px;"></div></td>
-                    <td><?= $row->keterangan ?></td>
-                    <td><?php if($row->status == "1"){
-                        echo "Sedang Proses";
-                    }else{
-                        echo "Selesai";
-                    } ?></td>
-                    <td>
-                        <a href="<?= url($url . '&ubah&id=' . $row->id_pengaduan) ?>" class="btn btn-info"> <i class="fa fa-edit"></i>Update</a>
-                    </td>
-                </tr>
-            <?php
-                $no++;
-            }
-            ?>
-        </tbody>
-    </table>
-    <?= content_close() ?>
+    // include './res.php';
+die();
+break;
 
-    <?= content_open('Data Perbaikan Selesai') ?>
+#----------------------------------------------------------------------------------------------------------------------------------------
+case "login":
+    $type_query = "show";
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $query = "SELECT * FROM tb_masyarakat WHERE email='$email' AND password='$password'";
+    $message = 'Data Ada!';
     
-    <hr>
-    <table class="table table-bordered table-striped" id="example">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama Pelapor</th>
-                <th>Kategori</th>
-                <th>Foto Pengaduan</th>
-                <th>Foto Perkembangan</th>
-                <th>Keterangan</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $no = 1;
-            $db->join('tb_perbaikan b','a.id_pengaduan=b.id_aduan','LEFT');
-            $db->join('tb_masyarakat c','a.nik=c.nik','LEFT');
-            $db->where('b.status_perbaikan', '2');
-            $get = $db->ObjectBuilder()->get('tb_pengaduan a');
-            foreach ($get as $row) { ?>
-                <tr>
-                    <td><?= $no ?></td>
-                    <td><?= $row->nama_lengkap ?></td>
-                    <td><?= $row->kategori ?></td>
-                    <td><div class="zoom"><img src="<?=assets('unggah/'.$row->foto_aduan)?>" style="width:50px;height:50px;"></div></td>
-                    <td><div class="zoom"><img src="<?=assets('unggah/'.$row->foto_perbaikan)?>" style="width:50px;height:50px;"></div></td>
-                    <td><?= $row->keterangan ?></td>
-                    <td>Selesai</td>
-                    
-                </tr>
-            <?php
-                $no++;
-            }
-            ?>
-        </tbody>
-    </table>
-    <?= content_close() ?>
-<?php } ?>
+    include './res.php';
+die();
+break;
+
+#----------------------------------------------------------------------------------------------------------------------------------------
+case "input_aduan":
+    $type_query = "input";
+    $nama_foto = $_POST['nama_foto'];
+    $foto_aduan = $_POST['foto_aduan'];
+    $pesan = $_POST['pesan'];
+    $no_telpon = $_POST['no_telpon'];
+    $lng = $_POST['lng'];
+    $lat = $_POST['lat'];
+    $kategori = $_POST['kategori'];
+    $nik = $_POST['nik'];
+    $id_dinas = $_POST['id_dinas'];
+    $realImage = base64_decode($foto_aduan);
+
+    file_put_contents("../assets/unggah/".$nama_foto,$realImage);
+
+    $query = "INSERT INTO tb_pengaduan(
+        foto_aduan,pesan,no_telpon,lng,lat,kategori,id_dinas,nik,status,id_perbaikan
+    ) VALUES(
+        '$nama_foto','$pesan','$no_telpon','$lng','$lat','$kategori','1','$nik','0','0'
+    )";
+    $message = 'Data Berhasil diinput!';
+    
+    include './res.php';
+die();
+break;
+
+#----------------------------------------------------------------------------------------------------------------------------------------
+case "list_dinas":
+    $type_query = "show";
+
+    $query = "SELECT * FROM tb_dinas";
+    $message = 'Data Ada!';
+    
+    include './res.php';
+die();
+break;
+
+#----------------------------------------------------------------------------------------------------------------------------------------
+case "list_aduan":
+    $type_query = "show";
+    $nik = $_POST['nik'];
+
+    $query = "SELECT * FROM tb_pengaduan WHERE nik='$nik'";
+    $message = 'Data Ada!';
+    
+    include './res.php';
+die();
+break;
+
+#----------------------------------------------------------------------------------------------------------------------------------------
+case "list_perbaikan":
+    $type_query = "show";
+    $nik = $_POST['nik'];
+
+    $query = "SELECT * FROM tb_perbaikan JOIN tb_pengaduan ON tb_perbaikan.id_aduan=tb_pengaduan.id_pengaduan JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id WHERE tb_pengaduan.nik='$nik'";
+    $message = 'Data Ada!';
+    
+    include './res.php';
+die();
+break;
+
+#----------------------------------------------------------------------------------------------------------------------------------------
+case "detail_perbaikan":
+    $type_query = "show";
+    $nik = $_POST['nik'];
+    $id = $_POST['id'];
+    $id_aduan = $_POST['id_aduan'];
+
+    if($id == "0"){
+        $query = "SELECT * FROM tb_pengaduan LEFT JOIN tb_perbaikan ON tb_pengaduan.id_pengaduan=tb_perbaikan.id_aduan JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id JOIN tb_masyarakat ON tb_pengaduan.nik=tb_masyarakat.nik WHERE tb_pengaduan.id_pengaduan='$id_aduan'";
+    }else{
+        $query = "SELECT * FROM tb_perbaikan JOIN tb_pengaduan ON tb_perbaikan.id_aduan=tb_pengaduan.id_pengaduan JOIN tb_dinas ON tb_pengaduan.id_dinas=tb_dinas.id JOIN tb_masyarakat ON tb_pengaduan.nik=tb_masyarakat.nik WHERE tb_perbaikan.id_aduan='$id_aduan'";
+    }
+
+    $message = 'Data Ada!';
+    
+    include './res.php';
+die();
+break;
+
+#----------------------------------------------------------------------------------------------------------------------------------------
+case "biodata":
+    $type_query = "show";
+    $nik = $_POST['nik'];
+
+    $query = "SELECT * FROM tb_masyarakat WHERE nik='$nik'";
+    $message = 'Data Ada!';
+    
+    include './res.php';
+die();
+break;
+
+    }
+}
