@@ -46,6 +46,7 @@ if (isset($_GET['proses'])) {
             $no = 1;
             $db->join('tb_masyarakat b','a.nik=b.nik','LEFT');
             $db->where('a.status', '0');
+            $db->orderBy("a.id_pengaduan","desc");
             $get = $db->ObjectBuilder()->get('tb_pengaduan a');
             foreach ($get as $row) { ?>
                 <tr>
