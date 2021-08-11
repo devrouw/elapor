@@ -36,6 +36,7 @@ if (isset($_GET['hapus'])) {
 <?php }
 
 if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
+    $id = "";
     $nama_kategori = "";
 
     if (isset($_GET['ubah']) and isset($_GET['id'])) {
