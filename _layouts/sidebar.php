@@ -32,6 +32,11 @@
           </a>
         </li>
         <li>
+          <a href="<?=url('data_kategori')?>">
+            <i class="fa fa-tasks"></i> <span>Kategori</span>
+          </a>
+        </li>
+        <li>
         <a href="<?=url('data_masyarakat')?>">
         <i class="fa fa-users"></i> <span>Data Masyarakat</span>
         </a>
