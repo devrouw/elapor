@@ -33,6 +33,11 @@ $(document).ready(function() {
             'pdf', 'print'
         ]
     } );
+});
+</script>
+<script>
+$(document).ready(function() {
+    $('#tbKategori').DataTable();
 } );
 </script>
 <script>
