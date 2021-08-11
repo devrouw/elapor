@@ -280,5 +280,16 @@ case "biodata":
 die();
 break;
 
+#----------------------------------------------------------------------------------------------------------------------------------------
+case "kategori":
+    $type_query = "show";
+
+    $query = "SELECT * FROM tb_kategori";
+    $message = 'Data Ada!';
+    
+    include './res.php';
+die();
+break;
+
     }
 }
